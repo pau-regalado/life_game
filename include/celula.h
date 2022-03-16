@@ -1,28 +1,41 @@
 #ifndef _CELULA_ 
 #define _CELULA_
 
+#include <vector>
+//#include "state.h"
+
 #include <iostream>
 
 class Rejilla;
+class State;
 
-enum estado{muerta, viva};
+enum estado{D, E, L, P, A};
 
 class Celula{
   private:
     int x_, y_;
     int vecinas_vivas_;
-    estado estado_;
+    State* estado_;
   public:
-    Celula(int x = 0, int y = 0, estado estado = muerta);
+    std::vector<int> vecinas_;
 
-    estado getState(void) const;
+    Celula(int x = 0, int y = 0, State* estado = nullptr);
+    ~Celula(void);
+
+    State* getState(void) const;
     int getVivas(void);
 
-    void setState(const estado);
+    void clearVecinas(void);
+
+    void setState(State *estado);
     void setX(const int x);
     void setY(const int y);
+
+    int getX(void);
+    int getY(void);
+
     void updateState(void);
-    int neighbors(const Rejilla& g);
+    void neighbors(const Rejilla& g);
 
 };
 

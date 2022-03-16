@@ -1,16 +1,39 @@
 #include "../include/rejilla.h"
 #include "../include/celula.h"
 
-int main (void){
-  Rejilla grid(5,5);
+int main (void){  
 
-  grid.update();
+  int r, c, i, n; 
+
+  std::cout << "Filas: ";
+  std::cin >> r;
+  std::cout << std::endl;
+
+  std::cout << "Columnas: ";
+  std::cin >> c;
+  std::cout << std::endl;
+
+  Rejilla grid(r,c);
+
+  std::cout << "Iniciar por defecto?: 1 Si | 0 No : ";
+  std::cin >> i;
+  std::cout << std::endl;
+
+  if (i){
+    grid.defecto();
+  } else {
+    grid.update();
+  }
 
   grid.printGrid();
 
+  std::cout << std::endl  << "Numero maximo de iteraciones: ";
+  std::cin >> n;
+  std::cout << std::endl;
+
   int opt;
   bool quit = false;
-  while (!quit) {
+  while (!quit && grid.getTurno() <= n) {
     std::cout << "1) Continuar" << std::endl;
     std::cout << "2) Terminar" << std::endl;
     std::cout << "opt> ";
@@ -26,6 +49,9 @@ int main (void){
     }
     case 2: 
       quit = true;
+      break;
+    default: 
+        quit = true;
     }
   }
   std::cout << std::endl;

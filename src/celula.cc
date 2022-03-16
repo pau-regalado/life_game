@@ -1,18 +1,34 @@
 #include "../include/celula.h"
 #include "../include/rejilla.h"
+#include "../include/state.h"
 
-Celula::Celula(int x, int y, estado estado){
+Celula::Celula(int x, int y,State* estado){
   x_ = x;
   y_ = y;
-  estado_ = estado;
+  vecinas_.resize(8);
   vecinas_vivas_ = 0;
+
+  if (estado == nullptr){
+    estado_ = new StateDead(this);
+  } else {
+    estado_ = estado;
+  }
 }
 
-estado Celula::getState(void) const{
+Celula::~Celula(void){
+  delete estado_;
+}
+
+void Celula::clearVecinas(void){
+  for (int i = 0; i < vecinas_.size(); i++)
+    vecinas_[i] = 0;
+}
+
+State* Celula::getState(void) const{
   return estado_;
 }
 
-void Celula::setState(const estado estado){
+void Celula::setState(State* estado){
   estado_ = estado;
 }
 
@@ -24,36 +40,37 @@ void Celula::setY(const int y){
   y_ = y;
 }
 
+int Celula::getX(void){
+  return x_;
+}
+
+int Celula::getY(void){
+  return y_;
+}
+
 int Celula::getVivas(void){
   return vecinas_vivas_;
 }
 
 void Celula::updateState(void){
-  if (estado_ == muerta && vecinas_vivas_ == 3){
-    estado_ = viva;
-  } else if (!(estado_ == viva && (vecinas_vivas_ == 3 || vecinas_vivas_ == 2))){
-    estado_ = muerta;
-  }
+  estado_ = estado_->nextState();
 }
 
-int Celula::neighbors(const Rejilla& g){
-  vecinas_vivas_ = 
-    g.getCelula(x_ - 1, y_ - 1).getState() +
-    g.getCelula(x_ - 1, y_    ).getState() +
-    g.getCelula(x_ - 1, y_ + 1).getState() +
-    g.getCelula(x_    , y_ - 1).getState() +
-    g.getCelula(x_    , y_ + 1).getState() +
-    g.getCelula(x_ + 1, y_ - 1).getState() +
-    g.getCelula(x_ + 1, y_    ).getState() +
-    g.getCelula(x_ + 1, y_ + 1).getState() ;
-  return vecinas_vivas_;
+void Celula::neighbors(const Rejilla& g){
+/*
+      vecinas_[g.getCelula(x_ - 1, y_ - 1).getState()]++;
+      vecinas_[g.getCelula(x_ - 1, y_    ).getState()]++;
+      vecinas_[g.getCelula(x_ - 1, y_ + 1).getState()]++;
+      vecinas_[g.getCelula(x_    , y_ - 1).getState()]++;
+      vecinas_[g.getCelula(x_    , y_ + 1).getState()]++;
+      vecinas_[g.getCelula(x_ + 1, y_ - 1).getState()]++;
+      vecinas_[g.getCelula(x_ + 1, y_    ).getState()]++;
+      vecinas_[g.getCelula(x_ + 1, y_ + 1).getState()]++;
+    return vecinas_vivas_;
+*/
+  estado_->neighbors(g, x_, y_);
 }
 
 std::ostream& operator<<(std::ostream& os, const Celula& cell){
-  if (cell.getState() == viva){
-    os << "🔵";
-  } else if (cell.getState() == muerta){
-    os << "🔴";
-  }
-  return os;
+  return os << cell.getState()->getState();
 }

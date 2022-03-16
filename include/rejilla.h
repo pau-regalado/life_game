@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "celula.h"
+class Celula;
 
 class Rejilla {
   private:
@@ -17,9 +17,11 @@ class Rejilla {
     ~Rejilla();
 
     void update(void);
+    void defecto(void);
 
     const Celula& getCelula(int, int) const;
     void nextGeneration(void);
+    int getTurno(void);
 
     void printGrid(void);
 };
