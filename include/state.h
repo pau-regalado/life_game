@@ -6,16 +6,19 @@
 class Rejilla;
 class Celula;
 
+// Clase abstracta | todos los metodos son virtuales puros
 class State {
   public:
-    virtual int neighbors(const Rejilla&, int i, int j )= 0;
+    virtual int neighbors(const Rejilla&, int i, int j ) = 0;
     virtual State* nextState() = 0;
     virtual char getState() const = 0;
 };
 
 class StateDead: public State {
   private:
-    Celula* celula_;
+    // Para enlazar con la celula y poder
+    // acceder a sus datos
+    Celula* celula_;  
     int nAdultas;
   public:
     StateDead(Celula* c):celula_(c){}
@@ -30,7 +33,6 @@ class StateDead: public State {
 class StateEgg: public State {
   private:
     Celula* celula_;
-    int nLarvas, nHuevos;
   public:
     StateEgg(Celula* c):celula_(c){}
     ~StateEgg(){

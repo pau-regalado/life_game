@@ -13,9 +13,9 @@ enum estado{D, E, L, P, A};
 
 class Celula{
   private:
+    //int vecinas_vivas_;
     int x_, y_;
-    int vecinas_vivas_;
-    State* estado_;
+    State* estado_; // Apunta a un tipo de estado en concreto para  polimorfismo
 
   public:
     std::vector<int> vecinas_;

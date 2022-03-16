@@ -6,7 +6,7 @@ Celula::Celula(int x, int y,State* estado){
   x_ = x;
   y_ = y;
   vecinas_.resize(8);
-  vecinas_vivas_ = 0;
+  //vecinas_vivas_ = 0;
 
   if (estado == nullptr){
     estado_ = new StateDead(this);
@@ -53,10 +53,12 @@ int Celula::getY(void){
 }
 
 int Celula::getVivas(void){
-  return vecinas_vivas_;
+  // return vecinas_vivas_;
+  return 0;
 }
 
 void Celula::updateState(void){
+  // Cambia su estado por el que dicte su objeto estado
   estado_ = estado_->nextState();
 }
 

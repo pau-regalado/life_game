@@ -42,7 +42,7 @@ int StateEgg::neighbors(const Rejilla& grid, int i, int j ) {
     para luego comprobar si es prositivo => muerta: larva*/
 
   celula_->clearVecinas(); // Reseteamos las vecinas
-
+  // Modifica el vector de vecinas de su celula 
   celula_->vecinas_[grid.getCelula(i - 1, j - 1).getState()->getState()]++;
   celula_->vecinas_[grid.getCelula(i - 1, j    ).getState()->getState()]++;
   celula_->vecinas_[grid.getCelula(i - 1, j + 1).getState()->getState()]++;
