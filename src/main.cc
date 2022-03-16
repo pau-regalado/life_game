@@ -25,15 +25,15 @@ int main (void){
     grid.update();
   }
 
-  grid.printGrid();
-
   std::cout << std::endl  << "Numero maximo de iteraciones: ";
   std::cin >> n;
   std::cout << std::endl;
 
+  grid.printGrid();
+
   int opt;
   bool quit = false;
-  while (!quit && grid.getTurno() <= n) {
+  while (!quit && grid.getTurno() < n) {
     std::cout << "1) Continuar" << std::endl;
     std::cout << "2) Terminar" << std::endl;
     std::cout << "opt> ";

@@ -28,6 +28,10 @@ State* Celula::getState(void) const{
   return estado_;
 }
 
+std::vector<int>& Celula::getVecinas(void){
+  return vecinas_;
+}
+
 void Celula::setState(State* estado){
   estado_ = estado;
 }

@@ -16,6 +16,7 @@ class Celula{
     int x_, y_;
     int vecinas_vivas_;
     State* estado_;
+
   public:
     std::vector<int> vecinas_;
 
@@ -24,6 +25,7 @@ class Celula{
 
     State* getState(void) const;
     int getVivas(void);
+    std::vector<int>& getVecinas(void);
 
     void clearVecinas(void);
 
