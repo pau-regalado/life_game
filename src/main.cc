@@ -1,41 +1,20 @@
 #include "../include/rejilla.h"
 #include "../include/celula.h"
 
-int main (void){  
-
-  int r, c, i, n; 
-
-  std::cout << "Filas: ";
-  std::cin >> r;
-  std::cout << std::endl;
-
-  std::cout << "Columnas: ";
-  std::cin >> c;
-  std::cout << std::endl;
-
-  Rejilla grid(r,c);
-
-  std::cout << "Iniciar por defecto?: 1 Si | 0 No : ";
-  std::cin >> i;
-  std::cout << std::endl;
-
-  if (i){
-    grid.defecto();
-  } else {
-    grid.update();
-  }
-
-  std::cout << std::endl  << "Numero maximo de iteraciones: ";
-  std::cin >> n;
-  std::cout << std::endl;
-
-  grid.printGrid();
-
+int main (void){ 
+  
+  Grid* g = new GridWithOpenBorder(10,10);
   int opt;
+  char type;
   bool quit = false;
-  while (!quit && grid.getTurno() < n) {
-    std::cout << "1) Continuar" << std::endl;
-    std::cout << "2) Terminar" << std::endl;
+
+  while (!quit) {
+    std::cout << "Grid actual: " << g->getName() << " Size: " << g->getRow() << "x" << g->getCol() << std::endl;
+    g->print();
+    std::cout << "1) Introducir celulas vivas" << std::endl;
+    std::cout << "2) Seleccionar Grid" << std::endl;
+    std::cout << "3) NextGeneration" << std::endl;
+    std::cout << "0) Salir" << std::endl;
     std::cout << "opt> ";
 
     std::cin >> opt;
@@ -44,16 +23,60 @@ int main (void){
 
     switch (opt){
     case 1: {
-      grid.nextGeneration();
+      g->insert();
       break;
     }
-    case 2: 
+    case 2: {
+      int x, y;
+      delete g;
+      std::cout << "Introduzca su nuevo tamaño: " << std::endl;
+      std::cout << "Filas: ";
+      std::cin >> x;
+      std::cout << "Columnas: ";
+      std::cin >> y;
+
+      std::cout << "Nuevo tipo: ([O]pen | [P]eriodic)" << std::endl;
+      std::cout << "opt> ";
+
+      std::cin >> type;
+
+      std::cout << std::endl;
+
+      switch (type){
+      case 'O': {
+        g = new GridWithOpenBorder(x,y);
+        break;
+      }
+      case 'P': {
+        g = new GridWithPeriodicBorder(x,y);
+        break;
+      }
+      default:
+        g = new GridWithOpenBorder(x,y);
+        break;
+      }
+
+      break;
+    }
+    case 3: {
+      g->nextGeneration();
+      break;
+    }
+    case 4: {
+      if (g->getCol() > 8 && g->getRow() > 8) {
+        g->defecto();
+      }
+      break;
+    }
+    case 0: 
       quit = true;
       break;
-    default: 
-        quit = true;
     }
   }
-  std::cout << std::endl;
-  return 0;
+    if (g != nullptr){
+      delete g;
+    }
+    return 0;
 }
+
+

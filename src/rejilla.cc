@@ -2,44 +2,29 @@
 #include "../include/celula.h"
 #include "../include/state.h"
 
-Rejilla::Rejilla(int row, int col){
+// ----------------------- Grid ---------------------------------
 
-  nrows_ = row + 2;
-  ncols_ = col + 2;
-  turno_ = 0;
-
-  rejilla_.resize(nrows_);
-  for (int i = 0; i < nrows_; i++) {
-    rejilla_[i].resize(ncols_);
-  }
-
-  for (int i = 0; i < nrows_; i++) {
-    for (int j = 0; j < ncols_; j++) {
-      rejilla_[i][j].setX(i);
-      rejilla_[i][j].setY(j);
-    }
-  }
+std::ostream& operator<<(std::ostream& os, Grid &g) {
+  g.print();
+  return os;
 }
 
-Rejilla::~Rejilla(){
-  delete &rejilla_;
+Grid::~Grid(){std::cout << "Destruccion base" << std::endl;}
+
+void Grid::defecto(void){
+  rejilla_[1][1].setState(new StateAlive(&rejilla_[1][1]));
+  rejilla_[2][2].setState(new StateAlive(&rejilla_[2][2]));
+  rejilla_[3][3].setState(new StateAlive(&rejilla_[3][3]));
+  rejilla_[4][4].setState(new StateAlive(&rejilla_[4][4]));
+  rejilla_[4][3].setState(new StateAlive(&rejilla_[4][3]));
+  rejilla_[2][4].setState(new StateAlive(&rejilla_[2][4]));
+  rejilla_[1][4].setState(new StateAlive(&rejilla_[1][4]));
 }
 
-int Rejilla::getTurno(void){
-  return turno_;
-}
+void Grid::insert(void){
+  std::cout << "Grid actual:" << std::endl;
+  print();
 
-void Rejilla::defecto(void){
-  rejilla_[1][1].setState(new StatePupa( &rejilla_[1][1]));
-  rejilla_[2][2].setState(new StateLarva(&rejilla_[2][2]));
-  rejilla_[3][3].setState(new StatePupa( &rejilla_[3][3]));
-  rejilla_[4][4].setState(new StatePupa( &rejilla_[4][4]));
-  rejilla_[4][3].setState(new StateLarva(&rejilla_[4][3]));
-  rejilla_[2][4].setState(new StateAdult(&rejilla_[2][4]));
-  rejilla_[1][4].setState(new StatePupa( &rejilla_[1][4]));
-}
-
-void Rejilla::update(void){
   int opt;
   bool quit = false;
 
@@ -61,33 +46,24 @@ void Rejilla::update(void){
       std::cout << "y: ";
       std::cin >> y;
 
-      if (x < nrows_ - 1 && y < ncols_ - 1){
-        std::cout << "En que estado? (D | E | L | P | A) : ";
+      if (x < nrows_ + 1 && y < ncols_ + 1){
+        std::cout << "En que estado? (D | A) : ";
         std::cin >> e;
         switch (e)
         {
         case 'D':
             rejilla_[x][y].setState(new StateDead(&rejilla_[x][y]));
           break;
-        case 'E':
-            rejilla_[x][y].setState(new StateEgg(&rejilla_[x][y]));
-          break;        
-        case 'L':
-            rejilla_[x][y].setState(new StateLarva(&rejilla_[x][y]));
-          break;
-        case 'P':
-            rejilla_[x][y].setState(new StatePupa(&rejilla_[x][y]));
-          break;
         case 'A':
-            rejilla_[x][y].setState(new StateAdult(&rejilla_[x][y]));
-          break;
+            rejilla_[x][y].setState(new StateAlive(&rejilla_[x][y]));
+          break;        
         default:
           break;
         }
       } else
         std::cout << "Posicion invalida";
-      std::cout << std::endl;
-      break;
+        std::cout << std::endl;
+        break;
     }
     case 2: 
       quit = true;
@@ -95,43 +71,94 @@ void Rejilla::update(void){
   }
 }
 
-const Celula& Rejilla::getCelula(int x, int y) const{
-  return rejilla_[x][y];
-}
-
-void Rejilla::nextGeneration(void){
+void Grid::nextGeneration(void){
 
   // Actualizamos vecinas vivas
-  for (int i = 1; i < nrows_ - 1; i++) {
-    for (int j = 1; j < ncols_ - 1; j++) {
+  for (int i = 1; i < nrows_ + 1; i++) {
+    for (int j = 1; j < ncols_ + 1; j++) {
       rejilla_[i][j].neighbors(*this);
     }
   }
-
-  for (int i = 1; i < nrows_ - 1; i++) {
-    for (int j = 1; j < ncols_ - 1; j++) {
+  for (int i = 1; i < nrows_ + 1; i++) {
+    for (int j = 1; j < ncols_ + 1; j++) {
       rejilla_[i][j].updateState();
     }
   }
 
   turno_++;
 
-  printGrid();
+  print();
 
 }
 
-void Rejilla::printGrid(void){
+// ------------------- GridWithOpenBorder ---------------------------------
 
-  std::cout << std::endl << "TURNO: " << turno_ << std::endl;
+GridWithOpenBorder::GridWithOpenBorder(int row, int col){
+  nrows_ = row;
+  ncols_ = col;
+  turno_ = 0;
+/*
+  rejilla_.resize(nrows_ + 2);
+
+  for (int i = 0; i < nrows_ + 2; i++) {
+    rejilla_[i].resize(ncols_  + 2);
+  }*/
+
+  rejilla_ = new Celula*[nrows_ + 2];
+  for (int i = 0; i < nrows_ + 2; i++) {
+      rejilla_[i] = new Celula[ncols_ + 2];
+    for (int j = 0; j < ncols_ + 2; j++) {
+      if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
+        rejilla_[i][j].setX(i);
+        rejilla_[i][j].setY(j);
+      } else {
+        rejilla_[i][j].setX(i);
+        rejilla_[i][j].setY(j);
+      }
+      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
+    }
+  } 
+}
+
+GridWithOpenBorder::~GridWithOpenBorder(){
+  // Does nothing but calls std::vector destructor
+  std::cout << "Destruccion OpenBorder" << std::endl;
+
+  for (int i = 0; i < nrows_ + 2; i++) {
+    for (int j = 0; j < ncols_ + 2; j++) {
+      rejilla_[i][j];
+    }
+  }
+  delete rejilla_;
+  
+
+  //rejilla_.clear();
+  //std::cout << "cierro con " << rejilla_.size() << std::endl;
+
+}
+
+Celula& GridWithOpenBorder::getCelula(int x, int y){
+  return rejilla_[x][y];
+  //if (x == 0 || y == 0 || x == nrows_ + 1 || y == ncols_ + 1) {
+    
+  //}
+  
+}
+const Celula& GridWithOpenBorder::getCelula(int x, int y) const{
+  return rejilla_[x][y];
+}
+
+void GridWithOpenBorder::print(void){
+  std::cout << std::endl << "TURNO OPEN: " << turno_ << std::endl;
 
   for (int i = 0; i < ncols_ + 2; i++){
     std::cout << "⬛";
   }
   std::cout << std::endl;
 
-  for (int i = 0; i < nrows_; i++) {
+  for (int i = 0; i < nrows_ + 2; i++) {
     std::cout << "⬛";
-    for (int j = 0; j < ncols_; j++) {
+    for (int j = 0; j < ncols_ + 2; j++) {
       std::cout << rejilla_[i][j];
     }
     std::cout << "⬛" << std::endl;
@@ -142,3 +169,84 @@ void Rejilla::printGrid(void){
   }
   std::cout << std::endl << std::endl;
 }
+
+// ------------------- GridWithPeriodicBorder ---------------------------------
+
+
+GridWithPeriodicBorder::GridWithPeriodicBorder(int row, int col){
+  nrows_ = row;
+  ncols_ = col;
+  turno_ = 0;
+/*
+  rejilla_.resize(nrows_ + 2);
+
+  for (int i = 0; i < nrows_ + 2; i++) {
+    rejilla_[i].resize(ncols_  + 2);
+  }*/
+  rejilla_ = new Celula*[nrows_ + 2];
+  for (int i = 0; i < nrows_  + 2; i++) {
+      rejilla_[i] = new Celula[ncols_  + 2];
+    for (int j = 0; j < ncols_  + 2; j++) {
+      if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
+        rejilla_[i][j].setX(i);
+        rejilla_[i][j].setY(j);
+      } else {
+        rejilla_[i][j].setX(i);
+        rejilla_[i][j].setY(j);
+      }
+      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
+    }
+  } 
+}
+
+GridWithPeriodicBorder::~GridWithPeriodicBorder(){
+  // Does nothing but calls std::vector destructor
+  std::cout << "Destruccion PeriodicBorder" << std::endl;
+  for (int i = 0; i < nrows_ + 2; i++) {
+    for (int j = 0; j < ncols_ + 2; j++) {
+      rejilla_[i][j];
+    }
+  }
+  delete rejilla_;
+  //rejilla_.clear();
+  //std::cout << "cierro con " << rejilla_.size() << std::endl;
+}
+
+Celula& GridWithPeriodicBorder::getCelula(int x, int y){
+  return rejilla_[x][y];
+  //if (x == 0 || y == 0 || x == nrows_ + 1 || y == ncols_ + 1) {
+    
+  //}
+  
+}
+const Celula& GridWithPeriodicBorder::getCelula(int x, int y) const{
+  return rejilla_[x][y];
+}
+
+void GridWithPeriodicBorder::print(void){
+  std::cout << std::endl << "TURNO PERIODIC: " << turno_ << std::endl;
+
+  for (int i = 0; i < ncols_ + 2; i++){
+    std::cout << "⬛";
+  }
+  std::cout << std::endl;
+
+  for (int i = 0; i < nrows_ + 2; i++) {
+    std::cout << "⬛";
+    for (int j = 0; j < ncols_ + 2; j++) {
+      std::cout << rejilla_[i][j];
+    }
+    std::cout << "⬛" << std::endl;
+  }
+  
+  for (int i = 0; i < ncols_ + 2; i++){
+    std::cout << "⬛";
+  }
+  std::cout << std::endl << std::endl;
+}
+
+// ------------------- GridWithReflectiveBorder ---------------------------------
+
+GridWithReflectiveBorder::GridWithReflectiveBorder(int row, int col){}
+GridWithReflectiveBorder::~GridWithReflectiveBorder(){}
+

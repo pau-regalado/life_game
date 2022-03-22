@@ -5,7 +5,7 @@
 Celula::Celula(int x, int y,State* estado){
   x_ = x;
   y_ = y;
-  vecinas_.resize(8);
+  vecinas_.resize(2);
   //vecinas_vivas_ = 0;
 
   if (estado == nullptr){
@@ -17,6 +17,7 @@ Celula::Celula(int x, int y,State* estado){
 
 Celula::~Celula(void){
   delete estado_;
+  //estado_ = nullptr;
 }
 
 void Celula::clearVecinas(void){
@@ -24,7 +25,7 @@ void Celula::clearVecinas(void){
     vecinas_[i] = 0;
 }
 
-State* Celula::getState(void) const{
+State const * Celula::getState(void) const{
   return estado_;
 }
 
@@ -33,6 +34,7 @@ std::vector<int>& Celula::getVecinas(void){
 }
 
 void Celula::setState(State* estado){
+  delete estado_;
   estado_ = estado;
 }
 
@@ -44,7 +46,7 @@ void Celula::setY(const int y){
   y_ = y;
 }
 
-int Celula::getX(void){
+int Celula::getX(void) const{
   return x_;
 }
 
@@ -62,7 +64,7 @@ void Celula::updateState(void){
   estado_ = estado_->nextState();
 }
 
-void Celula::neighbors(const Rejilla& g){
+void Celula::neighbors(const Grid& g){
 /*
       vecinas_[g.getCelula(x_ - 1, y_ - 1).getState()]++;
       vecinas_[g.getCelula(x_ - 1, y_    ).getState()]++;
@@ -78,5 +80,13 @@ void Celula::neighbors(const Rejilla& g){
 }
 
 std::ostream& operator<<(std::ostream& os, const Celula& cell){
-  return os << cell.getState()->getState();
+  switch (cell.getState()->getState())
+  {
+  case A:
+      return os << 'A';
+    break;
+  case D:
+      return os << 'D';
+    break;
+  }
 }

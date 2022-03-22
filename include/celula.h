@@ -2,14 +2,12 @@
 #define _CELULA_
 
 #include <vector>
-//#include "state.h"
-
 #include <iostream>
+#include "enum.h"
 
 class Rejilla;
 class State;
-
-enum estado{D, E, L, P, A};
+class Grid;
 
 class Celula{
   private:
@@ -23,7 +21,7 @@ class Celula{
     Celula(int x = 0, int y = 0, State* estado = nullptr);
     ~Celula(void);
 
-    State* getState(void) const;
+    State const* getState(void) const;
     int getVivas(void);
     std::vector<int>& getVecinas(void);
 
@@ -33,11 +31,11 @@ class Celula{
     void setX(const int x);
     void setY(const int y);
 
-    int getX(void);
+    int getX(void) const;
     int getY(void);
 
     void updateState(void);
-    void neighbors(const Rejilla& g);
+    void neighbors(const Grid& g);
 
 };
 
