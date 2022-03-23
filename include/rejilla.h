@@ -16,7 +16,7 @@ class Grid{
     Celula** rejilla_;
 
   public:
-    // Grid(int row = defSize, int col = defSize);
+    Grid(int row = defSize, int col = defSize);
     virtual ~Grid() = 0;
 
     // Initialitation

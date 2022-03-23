@@ -68,12 +68,12 @@ int main (void){
       break;
     }
     case 4: {
-      if (g->getCol() > 8 && g->getRow() > 8) {
+      if (g->getCol() < 8 && g->getRow() < 8) {
         g->defecto();
       }
       break;
     }
-    case 0: 
+    case 0:
       quit = true;
       break;
     }

@@ -4,6 +4,23 @@
 
 // ----------------------- Grid ---------------------------------
 
+Grid::Grid(int row, int col){
+  nrows_ = row;
+  ncols_ = col;
+  turno_ = 0;
+
+  rejilla_ = new Celula*[nrows_ + 2];
+  for (int i = 0; i < nrows_ + 2; i++) {
+    rejilla_[i] = new Celula[ncols_ + 2];
+    for (int j = 0; j < ncols_ + 2; j++) {
+//     if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
+      rejilla_[i][j].setX(i);
+      rejilla_[i][j].setY(j);
+      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
+    }
+  } 
+}
+
 std::ostream& operator<<(std::ostream& os, Grid &g) {
   g.print();
   return os;
@@ -12,13 +29,25 @@ std::ostream& operator<<(std::ostream& os, Grid &g) {
 Grid::~Grid(){std::cout << "Destruccion base" << std::endl;}
 
 void Grid::defecto(void){
+
+  rejilla_[1][1].setState(new StateAlive(&rejilla_[1][1]));
+  rejilla_[1][2].setState(new StateAlive(&rejilla_[1][2]));
+  rejilla_[1][3].setState(new StateAlive(&rejilla_[1][3]));
+  //rejilla_[4][1].setState(new StateAlive(&rejilla_[4][1]));
+
+  //rejilla_[4][3].setState(new StateAlive(&rejilla_[4][3]));
+  //rejilla_[2][4].setState(new StateAlive(&rejilla_[2][4]));
+  //rejilla_[1][4].setState(new StateAlive(&rejilla_[1][4]));
+
+/*
   rejilla_[1][1].setState(new StateAlive(&rejilla_[1][1]));
   rejilla_[2][2].setState(new StateAlive(&rejilla_[2][2]));
   rejilla_[3][3].setState(new StateAlive(&rejilla_[3][3]));
   rejilla_[4][4].setState(new StateAlive(&rejilla_[4][4]));
-  rejilla_[4][3].setState(new StateAlive(&rejilla_[4][3]));
-  rejilla_[2][4].setState(new StateAlive(&rejilla_[2][4]));
-  rejilla_[1][4].setState(new StateAlive(&rejilla_[1][4]));
+  //rejilla_[4][3].setState(new StateAlive(&rejilla_[4][3]));
+  //rejilla_[2][4].setState(new StateAlive(&rejilla_[2][4]));
+  //rejilla_[1][4].setState(new StateAlive(&rejilla_[1][4]));*/
+
 }
 
 void Grid::insert(void){
@@ -93,26 +122,7 @@ void Grid::nextGeneration(void){
 
 // ------------------- GridWithOpenBorder ---------------------------------
 
-GridWithOpenBorder::GridWithOpenBorder(int row, int col){
-  nrows_ = row;
-  ncols_ = col;
-  turno_ = 0;
-
-  rejilla_ = new Celula*[nrows_ + 2];
-  for (int i = 0; i < nrows_ + 2; i++) {
-      rejilla_[i] = new Celula[ncols_ + 2];
-    for (int j = 0; j < ncols_ + 2; j++) {
-      if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      } else {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      }
-      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
-    }
-  } 
-}
+GridWithOpenBorder::GridWithOpenBorder(int row, int col): Grid(row,col){}
 
 GridWithOpenBorder::~GridWithOpenBorder(){
   std::cout << "Destruccion OpenBorder" << std::endl;
@@ -126,9 +136,9 @@ GridWithOpenBorder::~GridWithOpenBorder(){
 }
 
 Celula& GridWithOpenBorder::getCelula(int x, int y){
-  return rejilla_[x][y];
+
   //if (x == 0 || y == 0 || x == nrows_ + 1 || y == ncols_ + 1) {
-    
+    return rejilla_[x][y];
   //}
   
 }
@@ -144,9 +154,9 @@ void GridWithOpenBorder::print(void){
   }
   std::cout << std::endl;
 
-  for (int i = 0; i < nrows_ + 2; i++) {
+  for (int i = 1; i < nrows_ + 1; i++) {
     std::cout << "⬛";
-    for (int j = 0; j < ncols_ + 2; j++) {
+    for (int j = 1; j < ncols_ + 1; j++) {
       std::cout << rejilla_[i][j];
     }
     std::cout << "⬛" << std::endl;
@@ -160,32 +170,12 @@ void GridWithOpenBorder::print(void){
 
 // ------------------- GridWithPeriodicBorder ---------------------------------
 
-
-GridWithPeriodicBorder::GridWithPeriodicBorder(int row, int col){
-  nrows_ = row;
-  ncols_ = col;
-  turno_ = 0;
-
-  rejilla_ = new Celula*[nrows_ + 2];
-  for (int i = 0; i < nrows_  + 2; i++) {
-      rejilla_[i] = new Celula[ncols_  + 2];
-    for (int j = 0; j < ncols_  + 2; j++) {
-      if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      } else {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      }
-      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
-    }
-  } 
-}
+GridWithPeriodicBorder::GridWithPeriodicBorder(int row, int col): Grid(row,col){}
 
 GridWithPeriodicBorder::~GridWithPeriodicBorder(){
   std::cout << "Destruccion PeriodicBorder" << std::endl;
-  for (int i = 0; i < nrows_ + 2; i++) {
-    for (int j = 0; j < ncols_ + 2; j++) {
+  for (int i = 0; i < nrows_; i++) {
+    for (int j = 0; j < ncols_; j++) {
       rejilla_[i][j];
     }
   }
@@ -193,13 +183,34 @@ GridWithPeriodicBorder::~GridWithPeriodicBorder(){
 }
 
 Celula& GridWithPeriodicBorder::getCelula(int x, int y){
+  //std::cout << "entra: i " << x << " y " << y << std::endl;
+  if (x == 0) {
+    x = nrows_;
+  }else if (x == nrows_ + 1) {
+    x = 0;
+  }
+  if (y == 0) {
+    y = ncols_;
+  }else if (y == ncols_ + 1) {
+    y = 0;
+  }
+
+  //std::cout << "sale: i " << x << " y " << y << std::endl;
   return rejilla_[x][y];
-  //if (x == 0 || y == 0 || x == nrows_ + 1 || y == ncols_ + 1) {
-    
-  //}
-  
 }
 const Celula& GridWithPeriodicBorder::getCelula(int x, int y) const{
+  //std::cout << "entra: i " << x << " y " << y << std::endl;
+  if (x == 0) {
+    x = nrows_;
+  }else if (x == nrows_ + 1) {
+    x = 1;
+  }
+  if (y == 0) {
+    y = ncols_;
+  }else if (y == ncols_ + 1) {
+    y = 1;
+  }
+  //std::cout << "sale: i " << x << " y " << y << std::endl;
   return rejilla_[x][y];
 }
 
@@ -211,9 +222,9 @@ void GridWithPeriodicBorder::print(void){
   }
   std::cout << std::endl;
 
-  for (int i = 0; i < nrows_ + 2; i++) {
+  for (int i = 1; i < nrows_ + 1; i++) {
     std::cout << "⬛";
-    for (int j = 0; j < ncols_ + 2; j++) {
+    for (int j = 1; j < ncols_ + 1; j++) {
       std::cout << rejilla_[i][j];
     }
     std::cout << "⬛" << std::endl;
@@ -228,26 +239,7 @@ void GridWithPeriodicBorder::print(void){
 // ------------------- GridWithReflectiveBorder ---------------------------------
 
 
-GridWithReflectiveBorder::GridWithReflectiveBorder(int row, int col){
-  nrows_ = row;
-  ncols_ = col;
-  turno_ = 0;
-
-  rejilla_ = new Celula*[nrows_ + 2];
-  for (int i = 0; i < nrows_ + 2; i++) {
-      rejilla_[i] = new Celula[ncols_ + 2];
-    for (int j = 0; j < ncols_ + 2; j++) {
-      if (i == 0 || j == 0 || i == nrows_ + 1 || j == ncols_ + 1) {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      } else {
-        rejilla_[i][j].setX(i);
-        rejilla_[i][j].setY(j);
-      }
-      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
-    }
-  } 
-}
+GridWithReflectiveBorder::GridWithReflectiveBorder(int row, int col): Grid(row,col){}
 
 GridWithReflectiveBorder::~GridWithReflectiveBorder(){
   std::cout << "Destruccion ReflectiveBorder" << std::endl;
@@ -273,15 +265,14 @@ const Celula& GridWithReflectiveBorder::getCelula(int x, int y) const{
 
 void GridWithReflectiveBorder::print(void){
   std::cout << std::endl << "TURNO Reflective: " << turno_ << std::endl;
-
   for (int i = 0; i < ncols_ + 2; i++){
     std::cout << "⬛";
   }
   std::cout << std::endl;
 
-  for (int i = 0; i < nrows_ + 2; i++) {
+  for (int i = 1; i < nrows_ + 1; i++) {
     std::cout << "⬛";
-    for (int j = 0; j < ncols_ + 2; j++) {
+    for (int j = 1; j < ncols_ + 1; j++) {
       std::cout << rejilla_[i][j];
     }
     std::cout << "⬛" << std::endl;

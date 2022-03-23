@@ -21,7 +21,9 @@ int StateDead::neighbors(const Grid& grid, int i, int j ) {
 }
 
 State* StateDead::nextState(){
+  
   if (celula_->vecinas_[A] == 3){
+    std::cout << "vive " << celula_->getX() << " " << celula_->getY() << std::endl;
     return new StateAlive(celula_);
   } else {
     return new StateDead(celula_);

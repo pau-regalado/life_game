@@ -83,10 +83,10 @@ std::ostream& operator<<(std::ostream& os, const Celula& cell){
   switch (cell.getState()->getState())
   {
   case A:
-      return os << 'A';
+      return os << "🔵";
     break;
   case D:
-      return os << 'D';
+      return os << "🔴";
     break;
   }
 }
