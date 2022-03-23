@@ -14,6 +14,7 @@ int main (void){
     std::cout << "1) Introducir celulas vivas" << std::endl;
     std::cout << "2) Seleccionar Grid" << std::endl;
     std::cout << "3) NextGeneration" << std::endl;
+    std::cout << "4) Rellenar con celulas" << std::endl;
     std::cout << "0) Salir" << std::endl;
     std::cout << "opt> ";
 
@@ -35,7 +36,7 @@ int main (void){
       std::cout << "Columnas: ";
       std::cin >> y;
 
-      std::cout << "Nuevo tipo: ([O]pen | [P]eriodic)" << std::endl;
+      std::cout << "Nuevo tipo: ([O]pen | [P]eriodic | [R]eflective)" << std::endl;
       std::cout << "opt> ";
 
       std::cin >> type;
@@ -49,6 +50,10 @@ int main (void){
       }
       case 'P': {
         g = new GridWithPeriodicBorder(x,y);
+        break;
+      }
+      case 'R': {
+        g = new GridWithReflectiveBorder(x,y);
         break;
       }
       default:

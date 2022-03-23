@@ -52,8 +52,12 @@ class GridWithReflectiveBorder: public Grid{
     GridWithReflectiveBorder(int row, int col);
     ~GridWithReflectiveBorder();
 
-    Celula& getCell(int, int) {}
-    const Celula& getCell(int, int) const{}
+    Celula& getCelula(int, int);
+    const Celula& getCelula(int, int) const;
+    std::string getName(void){return "Reflective";}
+
+    //std::ostream& operator<<(std::ostream& os);
+    virtual void print();
 };
 
 class GridWithOpenBorder: public Grid{

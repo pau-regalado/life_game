@@ -21,8 +21,6 @@ int StateDead::neighbors(const Grid& grid, int i, int j ) {
 }
 
 State* StateDead::nextState(){
-  //std::cout << "c A " << celula_->vecinas_['A'] << std::endl;
-  //std::cout << "c D " << celula_->vecinas_['D'] << std::endl;
   if (celula_->vecinas_[A] == 3){
     return new StateAlive(celula_);
   } else {
@@ -51,17 +49,13 @@ int StateAlive::neighbors(const Grid& grid, int i, int j ) {
   celula_->vecinas_[grid.getCelula(i + 1, j    ).getState()->getState()]++;
   celula_->vecinas_[grid.getCelula(i + 1, j + 1).getState()->getState()]++;
 
-  std::cout << "c " << i << " " << j << " v " << celula_->vecinas_[A] << std::endl;
-  std::cout << static_cast<estado>(A) << std::endl;
-
   return 0;
 }
 
 State* StateAlive::nextState(){
-    std::cout << "c A" << celula_->vecinas_[estado(A)] << std::endl;
-    std::cout << "c D " << celula_->vecinas_[estado(D)] << std::endl;
+    //std::cout << "c A" << celula_->vecinas_[estado(A)] << std::endl;
+    //std::cout << "c D " << celula_->vecinas_[estado(D)] << std::endl;
     if ((celula_->vecinas_[A] == 2) || (celula_->vecinas_[A] == 3)){
-        std::cout << "vive" << std::endl;
         return new StateAlive(celula_);
     } else {
         return new StateDead(celula_);
