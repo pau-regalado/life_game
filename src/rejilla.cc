@@ -113,11 +113,8 @@ void Grid::nextGeneration(void){
       rejilla_[i][j].updateState();
     }
   }
-
   turno_++;
-
   print();
-
 }
 
 // ------------------- GridWithOpenBorder ---------------------------------
@@ -239,7 +236,35 @@ void GridWithPeriodicBorder::print(void){
 // ------------------- GridWithReflectiveBorder ---------------------------------
 
 
-GridWithReflectiveBorder::GridWithReflectiveBorder(int row, int col): Grid(row,col){}
+GridWithReflectiveBorder::GridWithReflectiveBorder(int row, int col){
+  nrows_ = row;
+  ncols_ = col;
+  turno_ = 0;
+
+  rejilla_ = new Celula*[nrows_ + 2];
+  for (int i = 0; i < nrows_ + 2; i++) {
+    rejilla_[i] = new Celula[ncols_ + 2];
+    for (int j = 0; j < ncols_ + 2; j++) {
+      rejilla_[i][j].setX(i);
+      rejilla_[i][j].setY(j);
+      rejilla_[i][j].setState(new StateDead(&rejilla_[i][j]));
+    }
+  }
+} 
+
+/*
+      if (i == 0) {
+        rejilla_[i][j].setX(i+1);
+      }else if (i == nrows_ + 1){
+        rejilla_[i][j].setX(i-1);
+      } 
+      if (j == 0) {
+        rejilla_[i][j].setY(j+1);
+      }else if (j == ncols_ + 1){
+        rejilla_[i][j].setY(j-1);
+      }
+*/
+
 
 GridWithReflectiveBorder::~GridWithReflectiveBorder(){
   std::cout << "Destruccion ReflectiveBorder" << std::endl;
@@ -253,13 +278,73 @@ GridWithReflectiveBorder::~GridWithReflectiveBorder(){
 }
 
 Celula& GridWithReflectiveBorder::getCelula(int x, int y){
+  if (x == 0){
+    x = 1;
+    if (y == 0) {
+      y = 1;
+    } else if (y == ncols_ + 1) {
+      y = ncols_;
+    }
+  }
+  if (x == nrows_ + 1){
+    x = nrows_;
+    if (y == 0) {
+      y = 1;
+    } else if (y == ncols_ + 1) {
+      y = ncols_;
+    }
+  }
+  if (y == 0){
+    y = 1;
+    if (x == 0) {
+      x = 1;
+    } else if (x == nrows_ + 1) {
+      x = nrows_;
+    }
+  }
+  if (y == ncols_ + 1){
+    y = ncols_;
+    if (x == 0) {
+      x = 1;
+    } else if (x == nrows_ + 1) {
+      x = nrows_;
+    }
+  }
   return rejilla_[x][y];
-  //if (x == 0 || y == 0 || x == nrows_ + 1 || y == ncols_ + 1) {
-    
-  //}
-  
 }
 const Celula& GridWithReflectiveBorder::getCelula(int x, int y) const{
+  if (x == 0){
+    x = 1;
+    if (y == 0) {
+      y = 1;
+    } else if (y == ncols_ + 1) {
+      y = ncols_;
+    }
+  }
+  if (x == nrows_ + 1){
+    x = nrows_;
+    if (y == 0) {
+      y = 1;
+    } else if (y == ncols_ + 1) {
+      y = ncols_;
+    }
+  }
+  if (y == 0){
+    y = 1;
+    if (x == 0) {
+      x = 1;
+    } else if (x == nrows_ + 1) {
+      x = nrows_;
+    }
+  }
+  if (y == ncols_ + 1){
+    y = ncols_;
+    if (x == 0) {
+      x = 1;
+    } else if (x == nrows_ + 1) {
+      x = nrows_;
+    }
+  }
   return rejilla_[x][y];
 }
 
