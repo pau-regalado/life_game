@@ -4,5 +4,5 @@
 
 ## Status
 
--[x] Life Game
--[ ] Hash
+- [x] Life Game
+- [ ] Hash
