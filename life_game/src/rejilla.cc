@@ -35,6 +35,22 @@ std::ostream& operator<<(std::ostream& os, Grid &g) {
   return os;
 }
 
+// --------- MODIFICACION -----------
+
+void Grid::contEstados(void){
+  int v = 0, m = 0;
+  for(int i = 1; i < nrows_ + 1; i++){
+    for(int j = 1; j < ncols_ + 1; j++){
+    	if (rejilla_[i][j].getState()->getState() == A){
+	  v++;	
+	}else if (rejilla_[i][j].getState()->getState() == D) {
+	  m++;
+	}
+    }
+  }
+  std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
+}
+
 // NOTESE: segun esta implementacion de la practica, todos los destructores de 
 // las clases derivadas de Grid son  iguales, por lo que se podria implementar 
 // directamente en la clase padre y ahorrar codigo, pero se ha mantenido el 
@@ -185,6 +201,7 @@ void GridWithOpenBorder::print(void){
     std::cout << "⬛";
   }
   std::cout << std::endl << std::endl;
+  contEstados();
 }
 
 // ------------------- GridWithPeriodicBorder ---------------------------------
@@ -257,6 +274,7 @@ void GridWithPeriodicBorder::print(void){
     std::cout << "⬛";
   }
   std::cout << std::endl << std::endl;
+  contEstados();
 }
 
 // ------------------- GridWithReflectiveBorder ---------------------------------
@@ -375,4 +393,5 @@ void GridWithReflectiveBorder::print(void){
     std::cout << "⬛";
   }
   std::cout << std::endl << std::endl;
+  contEstados();
 }

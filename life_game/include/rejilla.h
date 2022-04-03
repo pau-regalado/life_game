@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "enum.h"
 
 const int defSize = 10;
 
@@ -33,6 +34,8 @@ class Grid{
     friend std::ostream& operator<<(std::ostream& os, Grid &g);
 
     void nextGeneration(void);
+
+    void contEstados(void);
 };
 
 class GridWithPeriodicBorder: public Grid{
