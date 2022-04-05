@@ -14,9 +14,6 @@
 const unsigned kDefaultSize = 10;
 const unsigned kDefaultVector = 3;
 
-//template <class Clave>
-//class Sequence;
-
 template <class Clave>
 class Tabla_hash_t{
 
@@ -60,36 +57,26 @@ Tabla_hash_t<Clave>::Tabla_hash_t(unsigned tableSize,
   intentos_ = 0;
   
   table_.resize(tableSize);
-  for (int i = 0; i < tableSize_; ++i){
-    table_[i] = new List<Clave>;
-    table_[i]->Resize(blockSize);
-  }
+
   if (fe == nullptr) {
-    
-  }/* else {
-    std::cout << " CONSTRUCTOR "<< std::endl;
+    for (int i = 0; i < tableSize_; ++i){
+      table_[i] = new List<Clave>;
+      table_[i]->Resize(1);
+    }
+  } else {
+
     fe_ = fe;
-    table_ = new Block<Clave>[tableSize];
-    
-    for (int i = 0; i < tableSize_; ++i)
-      table_[i]->Resize(blockSize_);
-    std::cout << " CONSTRUCTSSSSSSSSSSSSSSSSSOR "<< std::endl;
-  }*/
-
-
-
-  // table_.resize(tableSize_);
-
-  //for (int i = 0; i < tableSize_; ++i){
-  //  table_.at(i).Resize(blockSize_);
-  //}
+    for (int i = 0; i < tableSize_; ++i){
+      table_[i] = new Block<Clave>;
+      table_[i]->Resize(blockSize);
+    }
+  }
 }
 
 template <class Clave>
 Tabla_hash_t<Clave>::~Tabla_hash_t(void){
   delete fd_;
   delete fe_;
-  //delete[] table_;
 }
 
 template <class Clave>
@@ -136,9 +123,7 @@ template <class Clave>
 void Tabla_hash_t<Clave>::showTabla(void){
   for (int i = 0; i < tableSize_; ++i){
     std::cout << "[" << i << "]: ";
-    for (int j = 0; j < table_[i]->get_self().size(); ++j){
-      std::cout << table_[i]->at(j) << " ";
-    }
+    table_[i]->print();
     std::cout << std::endl;
   }
 }

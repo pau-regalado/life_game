@@ -21,8 +21,7 @@ class List: public Sequence<Clave>{
     bool EstaLleno(void) const;
 
     void Resize(int Size){}
-
-    // std::vector<Clave> get_self(void);
+    void print();
 
 };
 
@@ -65,11 +64,11 @@ bool List<Clave>::EstaLleno(void) const{
   return false; // Por definicion, nunca esta lleno
 }
 
-/*
 template <class Clave>
-std::vector<Clave> List<Clave>::get_self(void){
-  return Self_;
-}*/
-
+void List<Clave>::print() {
+  for (int i = 0; i < Sequence<Clave>::Self_.size(); ++i){
+    std::cout << Sequence<Clave>::Self_[i] << " ";
+  } 
+}
 
 #endif

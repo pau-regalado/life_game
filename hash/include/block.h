@@ -23,9 +23,8 @@ class Block: public Sequence<Clave>{
 
     virtual void Resize(int Size);
     void setMaxSize(int max);
-
-    //std::vector<Clave> get_self(void);
-
+    void print();
+    
   private:
     int ocupado_;
     int MaxSize_;
@@ -95,11 +94,11 @@ void Block<Clave>::setMaxSize(int max){
   MaxSize_ = max;
 }
 
-/*
 template <class Clave>
-std::vector<Clave> Block<Clave>::get_self(void){
-  return Self_;
-}*/
-
+void Block<Clave>::print() {
+  for (int i = 0; i < Sequence<Clave>::Self_.size(); ++i){
+    std::cout << Sequence<Clave>::Self_[i] << " ";
+  } 
+}
 
 #endif

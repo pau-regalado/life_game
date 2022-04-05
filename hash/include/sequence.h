@@ -18,6 +18,7 @@ class Sequence{
     virtual bool Insertarc(const Clave&X) = 0;
     virtual bool EstaLleno(void) const = 0;
     virtual void Resize(int size) = 0;
+    virtual void print() = 0;
 
     Clave at(int i){
       return Self_[i];

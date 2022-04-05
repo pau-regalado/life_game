@@ -10,12 +10,6 @@
 #include "../include/funcion_dispersion.h"
 #include "../include/funcion_exploracion.h"
 
-//#include "../include/funcion_dispersion.h"
-//#include "../include/lista_t.h"
-
-//#include "../src/lista_t.cc"
-//#include "../src/tabla_hash.cc"
-
 template <class Clave>
 void probar_tabla(Tabla_hash_t<Clave>* t){
   Clave n;
@@ -24,7 +18,6 @@ void probar_tabla(Tabla_hash_t<Clave>* t){
     t->Insertar(n);
   }
 } 
-
 
 void showmenu(void){
   std::cout << "i) Insertar elemento" << std::endl;
@@ -42,6 +35,7 @@ void pedir_exp(char& op){
   std::cout << "c) cuadratica " << std::endl;
   std::cout << "d) doble dispersion " << std::endl;
   std::cout << "r) redispersion " << std::endl;
+  std::cout << "s) sin exploracion (disp. abierta) " << std::endl;
 
   std::cout << "Introduzca una opcion: ";
   std::cin >> op;
@@ -53,7 +47,6 @@ int main (int argc, char* argv[]){
 
   int tamano, tamcelda;
   char tipo;
-  bool prueba = false;
 
 // ---------------------- PIDE F DISPERSION ---------------
 
@@ -68,8 +61,8 @@ int main (int argc, char* argv[]){
 
   std::cout << "Tipo de funcion de dispersion? " << std::endl;
   std::cout << "m) modulo " << std::endl;
+  std::cout << "s) suma " << std::endl;
   std::cout << "r) random " << std::endl;
-  std::cout << "p) prueba " << std::endl;
   std::cout << "Introduzca una opcion: ";
   std::cin >> tipo;
   std::cout << std::endl;
@@ -81,7 +74,7 @@ int main (int argc, char* argv[]){
       break;
     case 'r': fd = new fdrandom<int>(tamano);
       break;
-    case 'p': prueba = true;
+    case 's': fd = new fdSuma<int>(tamano);
       break;
     default:
      std::cout << "Error" << std::endl;
@@ -89,14 +82,12 @@ int main (int argc, char* argv[]){
 
 // ---------------------- PIDE F EXPLORACION ---------------
 
-  if (!prueba) { 
     FuncionExploracion<int>* fe;
     FuncionDispersion<int>* fdp;
     pedir_exp(tipo);
 
     switch (tipo){
       case 'l': fe = new feLineal<int>;
-      std::cout << "lineal: ";
         break;
       case 'c': fe = new feCuadratica<int>;
         break;
@@ -106,12 +97,14 @@ int main (int argc, char* argv[]){
         fdp = new fdrandom<int> (tamano);
         fe = new feRedispersion<int>(fdp);
         break;
+      case 's': fe = nullptr;
+        break;
       default: 
         std::cout << "Error" << std::endl;
     }
 
   // ---------------------- CREA TABLA ---------------
-    std::cout << "ANTES DE CONSTRUCTOR: ";
+
     Tabla_hash_t<int> tabla(tamano,tamcelda,fd, fe);
 
     bool quit = false;
@@ -164,42 +157,6 @@ int main (int argc, char* argv[]){
         default: std::cout << "Error. Vuelva a introducir la opcion" << std::endl;
       }
     }
-  }else{
-    std::cout << "PRUEBASSS" << std::endl;
-    int size = 10, nsim = 3, X = 10; 
-    FuncionExploracion<int>* fe;
-    FuncionDispersion<int>* fd = new fdModulo<int> (size);
-    // Prueba fe lineal
-    fe = new feLineal<int>;
-    Tabla_hash_t<int>* t_prueba = new Tabla_hash_t<int>(size, nsim, fd);
-
-    probar_tabla(t_prueba);
-    std::cout << "Con exploracion lineal: " << t_prueba->get_intentos() << std::endl;
-
-    // Prueba feCuadratica
-    fe = new feCuadratica<int>;
-    t_prueba = new Tabla_hash_t<int>(size,nsim, fd,fe);
-    //t_prueba->change_fe(fe);
-  
-    probar_tabla(t_prueba);
-    std::cout << "Con exploracion cuadratica: " << t_prueba->get_intentos() << std::endl;
-
-    // Prueba feDobleDispersion
-    fe = new feDobleDispersion<int>(fd);
-    t_prueba = new Tabla_hash_t<int>(size,nsim, fd,fe);
-    //t_prueba->change_fe(fe);
-    probar_tabla(t_prueba);
-    std::cout << "Con exploracion dobledispersion: " << t_prueba->get_intentos() << std::endl;
-
-    // prueba redisp
-    fd = new fdrandom<int> (size);
-    fe = new feRedispersion<int>(fd);
-    t_prueba = new Tabla_hash_t<int>(size,nsim, fd,fe);
-    //t_prueba->change_fe(fe);
-    probar_tabla(t_prueba);
-    std::cout << "Con exploracion dredispersion: " << t_prueba->get_intentos() << std::endl;
-
-  }
-  
+ 
   return 0;
 }

@@ -21,7 +21,27 @@ class fdModulo: public FuncionDispersion<Clave>{
     }
   private:
     unsigned nDatos;
-  };
+};
+
+template<class Clave>
+class fdSuma: public FuncionDispersion<Clave>{
+  public:
+
+    fdSuma(const unsigned n): nDatos(n){}
+    
+    unsigned operator()(const Clave& k) const {
+      int y, d = 0;
+      int x = k;
+      while (x > 0) {
+        y = x % 10;
+        d += y;
+        x /= 10;
+      }
+      return d % nDatos;
+    }
+  private:
+    unsigned nDatos;
+};
 
 template<class Clave>
 class fdrandom: public FuncionDispersion<Clave>{
@@ -35,6 +55,6 @@ class fdrandom: public FuncionDispersion<Clave>{
     }
   private:
     unsigned nDatos;
-  };
+};
 
 #endif
