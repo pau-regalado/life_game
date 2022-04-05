@@ -1,9 +1,11 @@
-SRC = ../src/
-INCLUDE = ../include/ 
+SRC=../src/
+INCLUDE=../include/
 
-all:
-	clear
-	g++ $(SRC)tabla_hash.cc $(SRC)lista_t.cc $(SRC)main.cc -o test
-	./test
+all: main
+
+main:
+	g++ $(SRC)main.cc -o main
 clean:
-	rm test
+	rm main
+	g++ $(SRC)main.cc -o main
+	./main
