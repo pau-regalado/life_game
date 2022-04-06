@@ -64,7 +64,6 @@ Tabla_hash_t<Clave>::Tabla_hash_t(unsigned tableSize,
       table_[i]->Resize(1);
     }
   } else {
-
     fe_ = fe;
     for (int i = 0; i < tableSize_; ++i){
       table_[i] = new Block<Clave>;
