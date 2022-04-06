@@ -5,4 +5,4 @@
 ## Status
 
 - [x] Life Game
-- [ ] Hash
+- [x] Hash
