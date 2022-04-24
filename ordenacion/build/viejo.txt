@@ -1,0 +1,19 @@
+SRC=../src/
+INCLUDE=../include/
+
+all: heapSort incrDec quickSort seleccion main
+
+heapSort: $(INCLUDE)heapSort.h
+	g++ $(SRC)heapSort.cc -c
+
+incrDec: $(INCLUDE)incrDec.h
+	g++ $(SRC)incrDec.cc -c
+
+quickSort: $(INCLUDE)quickSort.h
+	g++ $(SRC)quickSort.cc -c
+
+seleccion: $(INCLUDE)seleccion.h
+	g++ $(SRC)seleccion.cc -c
+
+main: heapSort incrDec quickSort seleccion
+	g++ heapSort.o incrDec.o quickSort.o seleccion.o $(SRC)main.cc -o main
