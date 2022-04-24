@@ -64,7 +64,7 @@ int main (int argc, char* argv[]){
 
     switch(opcion){
 
-      case 'q': quicksort<int>(v,0,v->size()-1);
+      case 'q': quicksort<int>(v, 0, v->size()-1);
         break;
 
       case 'd':
@@ -74,14 +74,14 @@ int main (int argc, char* argv[]){
           std::cin >> alpha;
         }while(!((alpha > 0) && (alpha < 1)));
 
-        incr_dec<int>(v,alpha,v->size());
+        incr_dec<int>(v, alpha, v->size());
 
         break;
 
-      case 'h': heapsort<int>(v,v->size());
+      case 'h': heapsort<int>(v, v->size());
         break;
 
-      case 's': seleccion<int>(v,v->size());
+      case 's': seleccion<int>(v, v->size());
         break;
       
       case 'k': quit = true;

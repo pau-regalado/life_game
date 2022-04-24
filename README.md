@@ -6,3 +6,4 @@
 
 - [x] Life Game
 - [x] Hash
+- [x] Ordenación
