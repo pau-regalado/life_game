@@ -8,14 +8,12 @@ void quicksort(std::vector<Clave>* vector, unsigned ini, unsigned fin){
   int i = ini, f = fin;
   int pivote = vector->at((i+f)/2);
 
-  //std::cout << "ini = " << ini << " fin = " << fin << " pivote = " << pivote << std::endl;
   while (i <= f){ 
     while (vector->at(i) < pivote){ i++;}
     while (vector->at(f) > pivote){ f--;}
 
     if (i <= f){
       swap(vector,i,f);
-      //std::cout << "intercambio " << i << " por " << f << std::endl;
       i++;
       f--;
     }
@@ -36,7 +34,7 @@ void quicksort(std::vector<Clave>* vector, unsigned ini, unsigned fin){
   }
 
   if (i < fin){
-    quicksort(vector,i,fin);
+    quicksort(vector, i, fin);
   }
 
 }

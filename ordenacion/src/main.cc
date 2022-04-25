@@ -9,6 +9,7 @@
 #include "../include/incrDec.h"
 #include "../include/heapSort.h"
 #include "../include/seleccion.h"
+#include "../include/radixSort.h"
 
 const int MAX_INT = 9999;
 const int MIN_INT = 1000;
@@ -17,8 +18,9 @@ void show_menu(void){
   std::cout << "Método de ordenación: " << std::endl;
   std::cout << "q) Quicksort " << std::endl;
   std::cout << "d) Incrementos decrecientes" << std::endl;
-  std::cout << "h) heapsort" << std::endl;
+  std::cout << "h) Heapsort" << std::endl;
   std::cout << "s) Seleccion" << std::endl;
+  std::cout << "s) RadixSort" << std::endl;
   std::cout << "k) quit" << std::endl;
   std::cout << "Opción: ";
 }
@@ -83,7 +85,9 @@ int main (int argc, char* argv[]){
 
       case 's': seleccion<int>(v, v->size());
         break;
-      
+
+      case 'r': radixSort<int>(v, v->size());
+        break;
       case 'k': quit = true;
         break;
 
