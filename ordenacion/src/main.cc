@@ -83,7 +83,7 @@ int main (int argc, char* argv[]){
       case 'h': heapsort<int>(v, v->size());
         break;
 
-      case 's': seleccion<int>(v, v->size());
+      case 's': seleccionar<int>(v, v->size());
         break;
 
       case 'r': radixSort<int>(v, v->size());

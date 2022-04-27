@@ -7,6 +7,7 @@ template <typename Clave>
 void quicksort(std::vector<Clave>* vector, unsigned ini, unsigned fin){
   int i = ini, f = fin;
   int pivote = vector->at((i+f)/2);
+  std::cout << "PIV " << pivote << std::endl;
 
   while (i <= f){ 
     while (vector->at(i) < pivote){ i++;}
@@ -26,7 +27,6 @@ void quicksort(std::vector<Clave>* vector, unsigned ini, unsigned fin){
   if (f >= vector->size()) {
     f = vector->size() - 1;
   }
-  std::cout << "antes de la llamada recursiva " << vector->size() << std::endl;
   std::cout << "i = " << i << " f = " << f << std::endl;
 
   if (ini < f){

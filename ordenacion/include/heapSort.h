@@ -15,7 +15,7 @@ void baja(std::vector<Clave>* vector, int index, int size){
       h = h1;
     }else if(vector->at(h1 - 1) > vector->at(h2 - 1)){
       h = h1;
-    }else{ 
+    }else{
       h = h2;
     }
 
