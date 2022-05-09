@@ -10,6 +10,7 @@
 #include "../include/heapSort.h"
 #include "../include/seleccion.h"
 #include "../include/radixSort.h"
+#include "../include/clave.h"
 
 const int MAX_INT = 9999;
 const int MIN_INT = 1000;
@@ -39,7 +40,7 @@ int main (int argc, char* argv[]){
   std::cout << "Introduzca el tamaño del vector : ";
   std::cin >> size; 
 
-  std::vector<int>* v = new std::vector<int>(size);
+  std::vector<Key>* v = new std::vector<Key>(size);
 
   std::cout << "vector aleatorio? s) si | n) no : ";
   std::cin >> opcion; 
@@ -48,8 +49,11 @@ int main (int argc, char* argv[]){
       fillRandVector(v);
       break;
     case 'n':
-      for(int i = 0; i < v->size(); ++i)
-        std::cin >> v->at(i);
+    int n;
+      for(int i = 0; i < v->size(); ++i){
+        std::cin >> n;
+        v->at(i) = n;
+      }
       break;
   }
 
@@ -65,7 +69,7 @@ int main (int argc, char* argv[]){
     mostrar_v(v);  
 
     switch(opcion){
-
+      /*
       case 'q': quicksort<int>(v, 0, v->size()-1);
         break;
 
@@ -82,12 +86,12 @@ int main (int argc, char* argv[]){
 
       case 'h': heapsort<int>(v, v->size());
         break;
-
-      case 's': seleccionar<int>(v, v->size());
+*/
+      case 's': seleccionar<Key>(v, v->size());
         break;
-
+/*
       case 'r': radixSort<int>(v, v->size());
-        break;
+        break;*/
       case 'k': quit = true;
         break;
 

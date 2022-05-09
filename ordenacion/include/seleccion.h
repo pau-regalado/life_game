@@ -2,6 +2,7 @@
 #define _SELECCION_
 
 #include "commons.h"
+#include "../include/clave.h"
 
 template <typename Clave>
 void seleccionar(std::vector<Clave>* vector, int size){

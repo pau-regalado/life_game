@@ -15,7 +15,7 @@ void mostrar_v(std::vector<Clave>* v){
 }
 
 template <class Clave>
-void swap(std::vector<Clave>* vector, Clave x, Clave y){
+void swap(std::vector<Clave>* vector, int x, int y){
   Clave aux = vector->at(x);
   vector->at(x) = vector->at(y);
   vector->at(y) = aux; 
