@@ -2,6 +2,7 @@
 #define __NODOB__
 
 #include <iostream>
+#include "tipo.h"
 
 template <class T>
 class NodoB{

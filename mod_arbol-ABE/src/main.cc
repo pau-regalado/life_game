@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 
+#include "../include/tipo.h"
 #include "../include/NodoB.h"
 #include "../include/AB.h"
 #include "../include/ABE.h"
@@ -25,7 +26,7 @@ void show_menu(void){
 int main (int argc, char* argv[]){
   std::cout << std::endl;
 
-  ABE<int> p;
+  ABE<Matricula> p;
 
   char opcion;
   bool quit = false;
@@ -34,8 +35,9 @@ int main (int argc, char* argv[]){
     std::cin >> opcion;
     switch(opcion){
       case 'i': {
-        int dato;
+        Matricula dato;
         std::cin >> dato;
+        std::cout << "dato = " << dato.getData() << std::endl;
         if (p.insertar(dato)) {
           std::cout << dato << " insertado!" << std::endl;
         }else{
@@ -48,7 +50,7 @@ int main (int argc, char* argv[]){
         std::cout << "Altura: " << p.alt() << std::endl;
         break;
       case 'b': {
-        int x;
+        Matricula x;
         std::cin >> x;
         if(p.buscar(x)){
           std::cout << x << " encontrado" << std::endl;
