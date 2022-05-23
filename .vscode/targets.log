@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 10 22:14:10 2022
+# Make data base, printed on Mon May 23 17:26:36 2022
 
 # Variables
 
@@ -25,7 +27,7 @@ XDG_SESSION_TYPE = tty
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
-NVM_INC = /home/usuario/.nvm/versions/node/v17.5.0/include/node
+NVM_INC = /home/usuario/.nvm/versions/node/v18.1.0/include/node
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -39,7 +41,7 @@ CURDIR := /home/usuario/Paula
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"es","availableLanguages":{"*":"es"},"_languagePackId":"16468021c5e76390b081b2c772725871.es","_translationsConfigFile":"/home/usuario/.vscode-server/data/clp/16468021c5e76390b081b2c772725871.es/tcf.json","_cacheRoot":"/home/usuario/.vscode-server/data/clp/16468021c5e76390b081b2c772725871.es","_resolvedLanguagePackCoreLocation":"/home/usuario/.vscode-server/data/clp/16468021c5e76390b081b2c772725871.es/da15b6fd3ef856477bf6f4fb29ba1b7af717770d","_corruptedFile":"/home/usuario/.vscode-server/data/clp/16468021c5e76390b081b2c772725871.es/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"es","availableLanguages":{"*":"es"},"_languagePackId":"125a9a608456aa5e8a25d0a18c7b1d68.es","_translationsConfigFile":"/home/usuario/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/tcf.json","_cacheRoot":"/home/usuario/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es","_resolvedLanguagePackCoreLocation":"/home/usuario/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/da15b6fd3ef856477bf6f4fb29ba1b7af717770d","_corruptedFile":"/home/usuario/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /home/usuario/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node
 # environment
@@ -59,17 +61,17 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /home/usuario
 # environment
-SSH_CONNECTION = 10.20.50.250 62739 10.6.130.111 22
+SSH_CONNECTION = 10.20.50.250 57475 10.6.130.111 22
 # environment
-PATH = /home/usuario/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/bin/remote-cli:/home/usuario/.nvm/versions/node/v17.5.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PATH = /home/usuario/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/bin/remote-cli:/home/usuario/.nvm/versions/node/v18.1.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-NVM_BIN = /home/usuario/.nvm/versions/node/v17.5.0/bin
+NVM_BIN = /home/usuario/.nvm/versions/node/v18.1.0/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-e70f9ede-6d4a-46d2-8f01-336b90652a3b.sock
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-cf17a5a1-0efa-43ff-a1d5-455bb841f5ba.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -111,7 +113,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # environment
-XDG_SESSION_ID = 745
+XDG_SESSION_ID = 13
 # environment
 USER = usuario
 # makefile
@@ -120,8 +122,6 @@ USER = usuario
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := make
-# environment
-OLDPWD = /home/usuario/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
 # default
 .VARIABLES := 
 # automatic
@@ -131,7 +131,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 10.20.50.250 62739 22
+SSH_CLIENT = 10.20.50.250 57475 22
 # environment
 NVM_DIR = /home/usuario/.nvm
 # automatic
@@ -163,7 +163,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 MOTD_SHOWN = pam
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=9/98=9%
+# Load=75/1024=7%, Rehash=0, Collisions=9/97=9%
 
 # Pattern-specific Variable Values
 
@@ -171,9 +171,9 @@ MOTD_SHOWN = pam
 
 # Directories
 
-# . (device 64768, inode 1220668): 12 files, no impossibilities.
+# . (device 64768, inode 1220668): 14 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -223,14 +223,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 20 / storage = 192 B / avg = 9 B
-# current buf: size = 8162 B / used = 192 B / count = 20 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 216 B / avg = 9 B
+# current buf: size = 8162 B / used = 216 B / count = 22 / avg = 9 B
 
-# strcache performance: lookups = 23 / hit rate = 13%
+# strcache performance: lookups = 25 / hit rate = 12%
 # hash-table stats:
-# Load=20/8192=0%, Rehash=0, Collisions=2/23=9%
-# Finished Make data base on Tue May 10 22:14:10 2022
+# Load=22/8192=0%, Rehash=0, Collisions=2/25=8%
+# Finished Make data base on Mon May 23 17:26:36 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

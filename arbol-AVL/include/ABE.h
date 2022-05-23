@@ -24,6 +24,9 @@ class ABE: public AB<Key>{
     // Busquedas
     bool buscar(const Key& X);
     bool buscarRama(NodoB<Key>* nodo, const Key& X);
+
+    // Eliminacion no implementada en esta clase
+    bool eliminar(const Key& X) { return false;}
 };
 
 template <class Key>
@@ -97,7 +100,7 @@ bool ABE<Key>::buscarRama(NodoB<Key>* nodod, const Key& X) {
   Q.push(std::make_pair(this->getRaiz(), 0));
 
   //Recorremos la cola hasta que este vacia
-  while (!Q.empty(  e)) {
+  while (!Q.empty(  )) {
     //Guardamos el primer valor de la cola
     std::pair<NodoB<Key>*,int> p;
     p = Q.front();
