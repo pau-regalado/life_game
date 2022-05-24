@@ -35,7 +35,6 @@ void changeTree(AB<Key>* &arbol, char &actArbol) {
   std::cout << "────────────────────────────" << std::endl;
   std::cout << "i) Equ[i]librado" << std::endl;
   std::cout << "b) [b]usqueda" << std::endl;
-  std::cout << "a) [a]vl" << std::endl;
   std::cout << "Seleccione un arbol: ";
   std::cin >> actArbol;
   std::cout << "────────────────────────────" << std::endl;
@@ -51,16 +50,10 @@ void changeTree(AB<Key>* &arbol, char &actArbol) {
         arbol = new ABB<Key>;
         std::cout << "Ahora ABB" << std::endl;
         break;
-      case 'a':
-        char o;
+      /*case 'a':
         arbol = new AVL<Key>;
         std::cout << "Ahora AVL" << std::endl;
-        std::cout << "Quiere modo traza? (s | n): ";
-        std::cin >> o;
-        if (o == 's')
-          arbol->setTraceMode(true);
-      
-        break;
+        break;*/
       default:
         actArbol = 'b';
         arbol = new ABB<Key>;

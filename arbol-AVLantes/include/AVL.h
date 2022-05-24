@@ -1,19 +1,19 @@
-#ifndef __ABB__
-#define __ABB__
+#ifndef __AVL__
+#define __AVL__
 
 #include <iostream>
 #include <queue>
 #include <utility>
 
-#include "AB.h"
+#include "ABB.h"
 
 template <class Key>
-class ABB: public AB<Key>{
+class AVL: public ABB<Key>{
 
   public:
-    ABB(void): AB<Key>(nullptr){}
-    ABB(NodoAVL<Key>* raiz): AB<Key>(raiz){}
-    // ~ABB(){}
+    AVL(void): ABB<Key>(nullptr){}
+    AVL(NodoAVL<Key>* raiz): AB<Key>(raiz){}
+    // ~AVL(){}
 
     bool insertar(const Key dato);
     bool insertarRama(const Key dato, NodoAVL<Key>* &nodo);
@@ -25,6 +25,11 @@ class ABB: public AB<Key>{
     bool buscar(const Key& X);
     bool buscarRama(NodoAVL<Key>* nodo, const Key& X);
 
+    void rotacionII(NodoAVL<Key>* &eliminado);
+    void rotacionID(NodoAVL<Key>* &eliminado);
+    void rotacionDI(NodoAVL<Key>* &eliminado);
+    void rotacionDD(NodoAVL<Key>* &eliminado);
+
     // Eliminacion no implementada en esta clase
     void sustituye(NodoAVL<Key>* &eliminado, NodoAVL<Key>* &sustituto);
     bool eliminar(const Key& X);
@@ -35,12 +40,17 @@ class ABB: public AB<Key>{
 };
 
 template <class Key>
-bool ABB<Key>::equilibrado(void){
+bool AVL<Key>::equilibrado(void){
   return equilibrioRama(this->getRaiz());
 }
 
 template <class Key>
-bool ABB<Key>::equilibrioRama(NodoAVL<Key>* nodo){
+void AVL<Key>::rotacionII(NodoAVL<Key>* &eliminado) {
+
+}
+
+template <class Key>
+bool AVL<Key>::equilibrioRama(NodoAVL<Key>* nodo){
   if(nodo == nullptr){return true;}
 
   int eq = tamRama(nodo->getIzq()) - tamRama(nodo->getDer());
@@ -57,7 +67,7 @@ bool ABB<Key>::equilibrioRama(NodoAVL<Key>* nodo){
 }
 
 template <class Key>
-bool ABB<Key>::insertar(const Key dato) {
+bool AVL<Key>::insertar(const Key dato) {
   if (buscar(dato))
    return false;
   else
@@ -65,7 +75,7 @@ bool ABB<Key>::insertar(const Key dato) {
 }
 
 template <class Key>
-bool ABB<Key>::insertarRama(const Key dato, NodoAVL<Key>* &nodo){
+bool AVL<Key>::insertarRama(const Key dato, NodoAVL<Key>* &nodo){
   if (nodo == nullptr) {
     nodo = new NodoAVL<Key>(dato,dato);
     return true;
@@ -77,12 +87,12 @@ bool ABB<Key>::insertarRama(const Key dato, NodoAVL<Key>* &nodo){
 }
 
 template <class Key>
-bool ABB<Key>::buscar(const Key& X) {
+bool AVL<Key>::buscar(const Key& X) {
   return buscarRama(this->getRaiz(), X);
 }
 
 template <class Key>
-bool ABB<Key>::buscarRama(NodoAVL<Key>* nodo, const Key& X) {
+bool AVL<Key>::buscarRama(NodoAVL<Key>* nodo, const Key& X) {
   if (!nodo) {
     return false;
   }
@@ -95,7 +105,7 @@ bool ABB<Key>::buscarRama(NodoAVL<Key>* nodo, const Key& X) {
 }
 
 template <class Key>
-void ABB<Key>::sustituye(NodoAVL<Key>* &eliminado, NodoAVL<Key>* &sustituto) {
+void AVL<Key>::sustituye(NodoAVL<Key>* &eliminado, NodoAVL<Key>* &sustituto) {
   if (sustituto->getDer()) {
     sustituye(eliminado, sustituto->getDer());
   } else {
@@ -107,12 +117,12 @@ void ABB<Key>::sustituye(NodoAVL<Key>* &eliminado, NodoAVL<Key>* &sustituto) {
 }
 
 template <class Key>
-bool  ABB<Key>::eliminar(const Key& X) {
+bool  AVL<Key>::eliminar(const Key& X) {
   return eliminarRama(this->getRaiz(), X);
 }
 
 template <class Key>
-bool  ABB<Key>::eliminarRama(NodoAVL<Key>* &nodo, const Key& clave) {
+bool  AVL<Key>::eliminarRama(NodoAVL<Key>* &nodo, const Key& clave) {
   if (!nodo) {
     return false;
   }

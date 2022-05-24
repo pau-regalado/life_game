@@ -11,9 +11,10 @@ template <class Key>
 class AVL: public ABB<Key>{
 
   public:
-    AVL(void): ABB<Key>(nullptr){}
-    AVL(NodoAVL<Key>* raiz): AB<Key>(raiz){}
+    AVL(void): ABB<Key>(nullptr), traceMode_(false){}
+    AVL(NodoAVL<Key>* raiz): AB<Key>(raiz), traceMode_(false){}
     // ~AVL(){}
+    void setTraceMode(bool mode);
 
     bool insertar(const Key dato);
     void insertarBalanceado(NodoAVL<Key>* &nodo, NodoAVL<Key>* &nuevo, bool& crece);
@@ -38,19 +39,30 @@ class AVL: public ABB<Key>{
     bool eliminarRama(NodoAVL<Key>* &nodo, const Key& X, bool& decrece);
     void eliminarReBalanceaIzquierda(NodoAVL<Key>* &nodo, bool& decrece);
     void eliminarReBalanceaDerecha  (NodoAVL<Key>* &nodo, bool& decrece);
+  
+  private:
+    bool traceMode_;
 };
+
+template <class Key>
+void AVL<Key>::setTraceMode(bool mode) {
+  traceMode_ = mode;
+}
 
 template <class Key>
 void AVL<Key>::insertarReBalanceaIzquierda(NodoAVL<Key>* &nodo, bool& crece) {
   switch (nodo->getBal()) {
     case -1:
+      std::cout << "Entro en case -1 en ins bal izq" << std::endl;
       nodo->getBal() = 0;
       crece = false;
       break;
     case 0:
+      std::cout << "Entro en case 0 en ins bal izq" << std::endl;
       nodo->getBal() = 1;
       break;
     case 1:
+      std::cout << "Entro en case 1 en ins bal izq" << std::endl;
       NodoAVL<Key>* nodo1 = nodo->getIzq();
       if (nodo1->getBal() == 1) {
         rotacionII(nodo);
@@ -60,19 +72,23 @@ void AVL<Key>::insertarReBalanceaIzquierda(NodoAVL<Key>* &nodo, bool& crece) {
       crece = false;
       break;
   }
+  std::cout << "Salgo de ins bal izq" << std::endl;
 }
 
 template <class Key>
 void AVL<Key>::insertarReBalanceaDerecha(NodoAVL<Key>* &nodo, bool& crece) {
   switch (nodo->getBal()) {
     case 1:
+      std::cout << "Entro en case 1 en ins bal der" << std::endl;
       nodo->getBal() = 0;
       crece = false;
       break;
     case 0:
+      std::cout << "Entro en case 0 en ins bal der" << std::endl;
       nodo->getBal() = -1;
       break;
     case -1:
+      std::cout << "Entro en case -1 en ins bal der" << std::endl;
       NodoAVL<Key>* nodo1 = nodo->getDer();
       if (nodo1->getBal() == -1) {
         rotacionDD(nodo);
@@ -82,6 +98,7 @@ void AVL<Key>::insertarReBalanceaDerecha(NodoAVL<Key>* &nodo, bool& crece) {
       crece = false;
       break;
   }
+  std::cout << "Salgo de ins bal der" << std::endl;
 }
 
 template <class Key>
@@ -240,10 +257,6 @@ void AVL<Key>::eliminarReBalanceaDerecha(NodoAVL<Key>* &nodo, bool& decrece) {
 
 template <class Key>
 void AVL<Key>::rotacionII(NodoAVL<Key>* &nodo) {
-  if (AB<Key>::getTraceMode()) {
-    std::cout << *this << std::endl;
-    std::cout << "Rotacion II en [" << nodo->getData()  << "]:" << std::endl;
-  }
   NodoAVL<Key>* nodo1 = nodo->getIzq();
   nodo->getIzq() = nodo1->getDer();
   nodo1->getDer() = nodo;
@@ -256,14 +269,11 @@ void AVL<Key>::rotacionII(NodoAVL<Key>* &nodo) {
     nodo1->getBal() = -1;
   }
   nodo = nodo1;
+  std::cout << *this << std::endl;
 }
 
 template <class Key>
 void AVL<Key>::rotacionDD(NodoAVL<Key>* &nodo) {
-  if (AB<Key>::getTraceMode()) {
-    std::cout << *this << std::endl;
-    std::cout << "Rotacion DD en [" << nodo->getData()  << "]:" << std::endl;
-  }
   NodoAVL<Key>* nodo1 = nodo->getDer();
   nodo->getDer() = nodo1->getIzq();
   nodo1->getIzq() = nodo;
@@ -275,15 +285,12 @@ void AVL<Key>::rotacionDD(NodoAVL<Key>* &nodo) {
     nodo->getBal() = -1;
     nodo1->getBal() = 1;
   }
-  nodo = nodo1;
+  nodo = nodo1; 
+  std::cout << *this << std::endl;
 }
 
 template <class Key>
 void AVL<Key>::rotacionID(NodoAVL<Key>* &nodo) {
-  if (AB<Key>::getTraceMode()) {
-    std::cout << *this << std::endl;
-    std::cout << "Rotacion ID en [" << nodo->getData()  << "]:" << std::endl;
-  }
   NodoAVL<Key>* nodo1 = nodo->getIzq();
   NodoAVL<Key>* nodo2 = nodo1->getDer();
   nodo->getIzq() = nodo2->getDer();
@@ -303,14 +310,11 @@ void AVL<Key>::rotacionID(NodoAVL<Key>* &nodo) {
   }
   nodo2->getBal() = 0;
   nodo = nodo2;
+    std::cout << *this << std::endl;
 }
 
 template <class Key>
 void AVL<Key>::rotacionDI(NodoAVL<Key>* &nodo) {
-  if (AB<Key>::getTraceMode()) {
-    std::cout << *this << std::endl;
-    std::cout << "Rotacion DI en [" << nodo->getData()  << "]:" << std::endl;
-  }
   NodoAVL<Key>* nodo1 = nodo->getDer();
   NodoAVL<Key>* nodo2 = nodo1->getIzq();
   nodo->getDer() = nodo2->getIzq();
@@ -330,6 +334,7 @@ void AVL<Key>::rotacionDI(NodoAVL<Key>* &nodo) {
   }
   nodo2->getBal() = 0;
   nodo = nodo2;
+    std::cout << *this << std::endl;
 }
 
 #endif

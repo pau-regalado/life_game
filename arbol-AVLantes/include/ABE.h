@@ -71,15 +71,13 @@ void ABE<Key>::insertarEquilibradoRama(const Key dato, NodoAVL<Key>* nodo){
     if(nodo->getIzq() != nullptr){
       insertarEquilibradoRama(dato, nodo->getIzq());
     }else{
-      NodoAVL<Key>* nuevo = new NodoAVL<Key>(dato);
-      nodo->setIzq(nuevo);
+      nodo->setIzq(new NodoAVL<Key>(dato));
     }
   }else{
     if(nodo->getDer() != nullptr){
       insertarEquilibradoRama(dato,nodo->getDer());
     }else{
-      NodoAVL<Key>* nuevo = new NodoAVL<Key>(dato);
-      nodo->setDer(nuevo);
+      nodo->setDer(new NodoAVL<Key>(dato));
     }
   }
 }
@@ -124,5 +122,12 @@ bool ABE<Key>::buscarRama(NodoAVL<Key>* nodod, const Key& X) {
   }
   return encontrado;
 }
+/*
+template <class Key>
+bool ABE<Key>::buscarRama(NodoAVL<Key>* nodo, const Key& X) {
+  if (!nodo) {return false;}
+  if (nodo->getData() == X) {return true;}
+  return (buscarRama(nodo->getIzq(), X) || buscarRama(nodo->getDer(), X));
+}*/
 
 #endif

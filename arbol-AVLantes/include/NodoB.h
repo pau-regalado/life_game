@@ -7,7 +7,7 @@ template <class T>
 class NodoB{
   public:
     NodoB(void);
-    NodoB(T data, T clave = 0, NodoB<T>* izq = nullptr, NodoB<T>* der = nullptr);
+    NodoB(T data = 0, T clave = 0, NodoB<T>* izq = nullptr, NodoB<T>* der = nullptr);
     ~NodoB(void);
     // getter / setters 
 

@@ -16,17 +16,13 @@ template <class Key>
 class AB{
 
   public:
-    AB(void): raiz_(nullptr), traceMode_(false){}
-    AB(NodoAVL<Key>* raiz): raiz_(raiz), traceMode_(false){}
+    AB(void): raiz_(nullptr){}
+    AB(NodoAVL<Key>* raiz): raiz_(raiz){}
     ~AB(){podar(raiz_);}
 
     // Setters / getters 
     NodoAVL<Key>*& getRaiz(void);
     void setRaiz(NodoAVL<Key>* nodo);
-
-    // Funcionalidad de la practica AVL
-    void setTraceMode(bool mode);
-    bool getTraceMode(void);
 
     // Recorridos
     void inorden(NodoAVL<Key>* nodo) const;
@@ -57,21 +53,10 @@ class AB{
     virtual bool eliminar(const Key& X) = 0;
 
   protected:
-    bool traceMode_;
     NodoAVL<Key>* raiz_;
     int size_;
     unsigned niveles_;
 };
-
-template <class Key>
-void AB<Key>::setTraceMode(bool mode) {
-  traceMode_ = mode;
-}
-
-template <class Key>
-bool AB<Key>::getTraceMode(void) {
-  return traceMode_;
-}
 
 template <class Key>
 NodoAVL<Key>*& AB<Key>::getRaiz(void){
