@@ -54,7 +54,7 @@ bool Block<Clave>::Buscarc(const Clave& X) const{
       encontrado = true;
     }
   }
-
+  
   return encontrado;
 }
 
