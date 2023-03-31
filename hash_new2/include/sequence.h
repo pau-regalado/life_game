@@ -25,14 +25,16 @@ class Sequence{
 
     // Mod
     unsigned getInsertElements(void) { return insertElements_; }
+    unsigned getSearchElements(void) { return searchElements_; }
 
     void addInsertElements(void) { insertElements_++; }
+    void addSearchElements(void) { searchElements_++; }
 
     std::vector<Key>& get_self(void);
 
   protected:
     std::vector<Key> Self_;
-    inline static unsigned insertElements_;
+    inline static unsigned insertElements_, searchElements_;
 };
 
 

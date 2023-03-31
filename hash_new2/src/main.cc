@@ -1,5 +1,6 @@
 #include <iostream>
 #include <array>
+#include <algorithm>
 // Ficheros de cabecera
 #include "../include/tabla_hash.h"
 #include "../include/sequence.h"
@@ -102,7 +103,10 @@ int main (int argc, char* argv[]){
 
   // ---------------------- CREA TABLA ---------------
 
-    Tabla_hash_t<int> tabla(tamano,tamcelda,fd, fe);
+    Tabla_hash_t<int> tabla(tamano,tamcelda,fd,fe);
+    Tabla_hash_t<int> tablaModulo(tamano,tamcelda,fd,fe);
+    Tabla_hash_t<int> tablaSuma(tamano,tamcelda,fd,fe);
+    Tabla_hash_t<int> tablaRandom(tamano,tamcelda,fd,fe);
 
     bool quit = false;
     while(!quit){
@@ -148,6 +152,26 @@ int main (int argc, char* argv[]){
         
         case 't':
           tabla.showTries();
+        break;
+
+        case 'e':
+          std::srand(time(NULL));
+          std::vector<int> numbers;
+          // Rellenar el vector de 500 numeros aleatorios diferentes
+          for (int i = 0; i < 500; ++i) {
+            long newNumber = std::rand();
+            //if (std::find(numbers.begin(), numbers.end(), newNumber) == numbers.end()) {
+              numbers.push_back(newNumber);
+              std::cout << numbers << std::endl;
+            //}  
+          }
+          int count = 0;
+          while (count < 500) {
+            // Insertamos los 50 siguientes
+            for (int i = 0; i < 50; ++i) {
+              tabla.Insertar(numbers[count + i]);
+            }
+          }
         break;
 
         case 'q':

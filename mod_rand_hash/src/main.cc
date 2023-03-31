@@ -175,9 +175,9 @@ int main (int argc, char* argv[]){
               tabla.Buscar(numbers[count + std::rand() % 50]); // Revisar que efectivamente se meten bien
             }
             // Imprimimos estadisticas
-            std::cout << "Con " << count + 1 << " elementos insertados [" << ((float)count / 500) * 100 << "%]: " << std::endl;
-            tabla.showTries(); // Se puede cambiar esta funcion o crear otra nueva parecida
-            count += 50;
+            //std::cout << "Con " << count + 1 << " elementos insertados [" << ((float)count / 500) * 100 << "%]: " << std::endl;
+            //tabla.showTries(); // Se puede cambiar esta funcion o crear otra nueva parecida
+            //count += 50;
           }
           break;
         }

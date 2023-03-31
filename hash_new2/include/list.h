@@ -35,6 +35,7 @@ template <class Key>
 bool List<Key>::Buscarc(const Key& X) {
   bool encontrado = false;
   for (int i = 0; i < Sequence<Key>::Self_.size(); ++i){
+    Sequence<Key>::addSearchElements();
     if (Sequence<Key>::Self_[i] == X){
       encontrado = true;
     }

@@ -138,7 +138,8 @@ void Tabla_hash_t<Key>::showTries() {
   float porcentaje = (table_[0]->getInsertElements() * 100) / float(capacidad);
   std::cout << "Capacidad tabla     : " << capacidad << std::endl;
   std::cout << "Elementos insertados: " << table_[0]->getInsertElements() << std::endl;
-  std::cout << "Porcentaje ocupaod  : " << porcentaje << std::endl;
+  std::cout << "Elementos buscados: " << table_[0]->getSearchElements() << std::endl;
+  //std::cout << "Porcentaje ocupaod  : " << porcentaje << std::endl;
 }
 
 #endif
