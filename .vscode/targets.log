@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 24 13:21:20 2022
+# Make data base, printed on Tue Apr 18 17:11:00 2023
 
 # Variables
 
@@ -22,10 +24,6 @@ XDG_SESSION_CLASS = user
 VSCODE_AGENT_FOLDER = /home/usuario/.vscode-server
 # environment
 XDG_SESSION_TYPE = tty
-# environment
-VSCODE_LOG_NATIVE = false
-# environment
-NVM_INC = /home/usuario/.nvm/versions/node/v18.1.0/include/node
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -35,15 +33,13 @@ NVM_INC = /home/usuario/.nvm/versions/node/v18.1.0/include/node
 # default
 MAKE_VERSION := 4.2.1
 # makefile
-CURDIR := /home/usuario/Paula
+CURDIR := /home/usuario/life_game
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+VSCODE_NLS_CONFIG = {"locale":"en","osLocale":"en","availableLanguages":{}}
 # environment
-_ = /home/usuario/.vscode-server/bin/dfd34e8260c270da74b5c2d86d61aee4b6d56977/node
-# environment
-WALLABY_PRODUCTION = true
+_ = /home/usuario/.vscode-server/bin/704ed70d4fd1c6bd6342c436f1ede30d1cff4710/node
 # makefile
 MAKEFILE_LIST := 
 # 'override' directive
@@ -53,23 +49,19 @@ XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
 # environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /home/usuario
 # environment
-SSH_CONNECTION = 10.209.31.16 39322 10.6.130.111 22
+SSH_CONNECTION = 10.20.51.67 58424 10.6.129.52 22
 # environment
-PATH = /home/usuario/.vscode-server/bin/dfd34e8260c270da74b5c2d86d61aee4b6d56977/bin/remote-cli:/home/usuario/.nvm/versions/node/v18.1.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PATH = /home/usuario/.vscode-server/bin/704ed70d4fd1c6bd6342c436f1ede30d1cff4710/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-NVM_BIN = /home/usuario/.nvm/versions/node/v18.1.0/bin
+ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_LOG_STACK = false
-# environment
-VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-f5abec5e-8658-4867-bfd1-7d8bc960ffe0.sock
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-11813d97-5245-44c7-a282-d15cce8b567d.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -77,9 +69,7 @@ LS_COLORS =
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_PIPE_LOGGING = true
-# environment
-PWD = /home/usuario/Paula
+PWD = /home/usuario/life_game
 # default
 .LOADED := 
 # automatic
@@ -93,9 +83,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = usuario
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# environment
-NVM_CD_FLAGS = 
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 +F = $(notdir $+)
 # environment
@@ -109,9 +97,9 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # environment
-XDG_SESSION_ID = 44
+XDG_SESSION_ID = 216
 # environment
 USER = usuario
 # makefile
@@ -129,13 +117,13 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 10.209.31.16 39322 22
-# environment
-NVM_DIR = /home/usuario/.nvm
+SSH_CLIENT = 10.20.51.67 58424 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-BROWSER = /home/usuario/.vscode-server/bin/dfd34e8260c270da74b5c2d86d61aee4b6d56977/bin/helpers/browser.sh
+BROWSER = /home/usuario/.vscode-server/bin/704ed70d4fd1c6bd6342c436f1ede30d1cff4710/bin/helpers/browser.sh
+# environment
+VSCODE_HANDLES_SIGPIPE = true
 # default
 MAKEFILES := 
 # automatic
@@ -155,11 +143,9 @@ MAKE_HOST := x86_64-pc-linux-gnu
 # environment
 LANG = C
 # environment
-VSCODE_EXTHOST_WILL_SEND_SOCKET = true
-# environment
 MOTD_SHOWN = pam
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=9/96=9%
+# Load=66/1024=6%, Rehash=0, Collisions=9/88=10%
 
 # Pattern-specific Variable Values
 
@@ -167,9 +153,9 @@ MOTD_SHOWN = pam
 
 # Directories
 
-# . (device 64768, inode 1220668): 15 files, no impossibilities.
+# . (device 64768, inode 1204541): 21 files, no impossibilities.
 
-# 15 files, no impossibilities in 1 directories.
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -219,14 +205,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 23 / storage = 226 B / avg = 9 B
-# current buf: size = 8162 B / used = 226 B / count = 23 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 310 B / avg = 10 B
+# current buf: size = 8162 B / used = 310 B / count = 29 / avg = 10 B
 
-# strcache performance: lookups = 26 / hit rate = 11%
+# strcache performance: lookups = 32 / hit rate = 9%
 # hash-table stats:
-# Load=23/8192=0%, Rehash=0, Collisions=2/26=8%
-# Finished Make data base on Tue May 24 13:21:20 2022
+# Load=29/8192=0%, Rehash=0, Collisions=2/32=6%
+# Finished Make data base on Tue Apr 18 17:11:00 2023
 
  
-make: *** No rule to make target 'all'.  Stop.
-

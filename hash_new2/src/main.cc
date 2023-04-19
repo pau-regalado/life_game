@@ -44,7 +44,7 @@ void pedir_exp(char& op){
 
 int main (int argc, char* argv[]){
 
-  int tamano, tamcelda;
+  long tamano, tamcelda;
   char tipo;
 // ---------------------- PIDE F DISPERSION ---------------
 
@@ -65,14 +65,14 @@ int main (int argc, char* argv[]){
   std::cin >> tipo;
   std::cout << std::endl;
 
-  FuncionDispersion<int>* fd;
+  FuncionDispersion<long>* fd;
 
   switch (tipo){
-    case 'm': fd = new fdModulo<int>(tamano);
+    case 'm': fd = new fdModulo<long>(tamano);
       break;
-    case 'r': fd = new fdrandom<int>(tamano);
+    case 'r': fd = new fdrandom<long>(tamano);
       break;
-    case 's': fd = new fdSuma<int>(tamano);
+    case 's': fd = new fdSuma<long>(tamano);
       break;
     default:
      std::cout << "Error" << std::endl;
@@ -80,20 +80,20 @@ int main (int argc, char* argv[]){
 
 // ---------------------- PIDE F EXPLORACION ---------------
 
-    FuncionExploracion<int>* fe;
-    FuncionDispersion<int>* fdp;
+    FuncionExploracion<long>* fe;
+    FuncionDispersion<long>* fdp;
     pedir_exp(tipo);
 
     switch (tipo){
-      case 'l': fe = new feLineal<int>;
+      case 'l': fe = new feLineal<long>;
         break;
-      case 'c': fe = new feCuadratica<int>;
+      case 'c': fe = new feCuadratica<long>;
         break;
-      case 'd': fe = new feDobleDispersion<int>(fd);
+      case 'd': fe = new feDobleDispersion<long>(fd);
         break;
       case 'r': 
-        fdp = new fdrandom<int> (tamano);
-        fe = new feRedispersion<int>(fdp);
+        fdp = new fdrandom<long> (tamano);
+        fe = new feRedispersion<long>(fdp);
         break;
       case 's': fe = nullptr;
         break;
@@ -102,11 +102,15 @@ int main (int argc, char* argv[]){
     }
 
   // ---------------------- CREA TABLA ---------------
+  FuncionDispersion<long>* fdModul = new fdModulo<long>(tamano);
+  FuncionDispersion<long>* fdSum = new fdSuma<long>(tamano);
+  FuncionDispersion<long>* fdrando = new fdrandom<long>(tamano);
+  Tabla_hash_t<long> tablaModulo(tamano,tamcelda,fdModul,fe);
+  Tabla_hash_t<long> tablaSuma(tamano,tamcelda,fdSum,fe);
+  Tabla_hash_t<long> tablarandom(tamano,tamcelda,fdrando,fe);
 
-    Tabla_hash_t<int> tabla(tamano,tamcelda,fd,fe);
-    Tabla_hash_t<int> tablaModulo(tamano,tamcelda,fd,fe);
-    Tabla_hash_t<int> tablaSuma(tamano,tamcelda,fd,fe);
-    Tabla_hash_t<int> tablaRandom(tamano,tamcelda,fd,fe);
+  
+  Tabla_hash_t<long> tabla(tamano,tamcelda,fd,fe);
 
     bool quit = false;
     while(!quit){
@@ -154,25 +158,37 @@ int main (int argc, char* argv[]){
           tabla.showTries();
         break;
 
-        case 'e':
+        case 'e': {
+
           std::srand(time(NULL));
-          std::vector<int> numbers;
+          std::vector<long> numbers;
           // Rellenar el vector de 500 numeros aleatorios diferentes
           for (int i = 0; i < 500; ++i) {
             long newNumber = std::rand();
-            //if (std::find(numbers.begin(), numbers.end(), newNumber) == numbers.end()) {
+            if (std::find(numbers.begin(), numbers.end(), newNumber) == numbers.end()) {
               numbers.push_back(newNumber);
-              std::cout << numbers << std::endl;
-            //}  
+            }  
           }
           int count = 0;
           while (count < 500) {
-            // Insertamos los 50 siguientes
             for (int i = 0; i < 50; ++i) {
-              tabla.Insertar(numbers[count + i]);
+              tablaModulo.Insertar(numbers[count + i]);
+              tablaSuma.Insertar(numbers[count + i]);
+              tablarandom.Insertar(numbers[count + i]);
             }
+            for (int i = 0; i < 20; ++i) {
+              int index = count + std::rand() % 50;
+              tablaModulo.Buscar(numbers[index]);
+              tablaSuma.Buscar(numbers[index]);
+              tablarandom.Buscar(numbers[index]);
+            }
+            tablaModulo.showTries();
+            tablaSuma.showTries();
+            tablarandom.showTries();
+            count += 50;
           }
         break;
+        }
 
         case 'q':
           std::cout << "Adios" << std::endl;
