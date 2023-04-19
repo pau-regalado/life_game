@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
+#include <algorithm>
+#include <chrono>
 
 #include "../include/quickSort.h"
 #include "../include/mergeSort.h"
@@ -12,6 +14,8 @@
 #include "../include/seleccion.h"
 #include "../include/insercion.h"
 #include "../include/radixSort.h"
+using namespace std;
+using namespace std::chrono;
 
 const int MAX_INT = 9999;
 const int MIN_INT = 1000;
@@ -23,7 +27,7 @@ void show_menu(void){
   std::cout << "s) Seleccion" << std::endl;
   std::cout << "i) Insercion" << std::endl;
   std::cout << "r) RadixSort" << std::endl;
-  std::cout << "k) quit" << std::endl;
+  std::cout << "m) MergeSort" << std::endl;
   std::cout << "Opción: ";
 }
 
@@ -43,7 +47,7 @@ int main (int argc, char* argv[]){
 
   std::vector<long>* v = new std::vector<long>(size);
 
-  /*
+ 
   std::cout << "vector aleatorio? s) si | n) no : ";
   std::cin >> opcion; 
   switch(opcion){
@@ -53,12 +57,13 @@ int main (int argc, char* argv[]){
     case 'n':
     int n;
       for(int i = 0; i < v->size(); ++i){
+        std::cout << "Introduzca un numero: " << std::endl;
         std::cin >> n;
         v->at(i) = n;
       }
       break;
   }
-  */
+
 
   bool quit = false;
 
@@ -102,6 +107,21 @@ int main (int argc, char* argv[]){
         break;
       case 'm': 
         sorter = new MergeSortMethod<long>(v, v->size());
+        break;
+      case 'o': 
+        //auto start = high_resolution_clock::now();
+        //auto stop = high_resolution_clock::now();
+        chrono.start();
+        std::cout << "Insersion: " << chrono.duration() << std::endl;
+        chrono.stop();
+
+        chrono.start();
+        std::cout << "Seleccion: " << chrono.duration() << std::endl;
+        chrono.stop();
+
+        chrono.start();
+        std::cout << "Insersion: " << chrono.duration() << std::endl;
+        chrono.stop();
         break;
       case 'k': quit = true;
         break;
