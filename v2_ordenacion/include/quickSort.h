@@ -18,7 +18,7 @@ void quicksort(std::vector<Clave>* vector, unsigned ini, unsigned fin){
       i++;
       f--;
     }
-    mostrar_v(vector);
+    //mostrar_v(vector);
   }
 
   if (i < 0) {

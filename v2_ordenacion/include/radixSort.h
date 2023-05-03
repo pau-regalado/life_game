@@ -27,8 +27,8 @@ class RadixSortMethod: public SortMethod<Key>{
           vector->at(index++) = cubetas[k][l];
         }
       }
-      std::cout << "Ordenacion por " << i + 1 << "º digito" << std::endl;
-      mostrar_v(vector);
+      //std::cout << "Ordenacion por " << i + 1 << "º digito" << std::endl;
+      //mostrar_v(vector);
     }
   }
 

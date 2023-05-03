@@ -19,14 +19,14 @@ class SeleccionMethod: public SortMethod<Key>{
             }
           }
           swap(vector,min,i);
-          mostrar_v(vector);
+          //mostrar_v(vector);
         }
     }
 
     void seleccion(std::vector<Key>* vector,int size){
       for(int i = 0; i < size - 1; i++){
         seleccionar(vector, i);
-        mostrar_v(vector);
+        //mostrar_v(vector);
       }
     }
 };

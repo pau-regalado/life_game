@@ -14,8 +14,6 @@
 #include "../include/seleccion.h"
 #include "../include/insercion.h"
 #include "../include/radixSort.h"
-using namespace std;
-using namespace std::chrono;
 
 const int MAX_INT = 9999;
 const int MIN_INT = 1000;
@@ -46,95 +44,35 @@ int main (int argc, char* argv[]){
   std::cin >> size; 
 
   std::vector<long>* v = new std::vector<long>(size);
-
- 
-  std::cout << "vector aleatorio? s) si | n) no : ";
-  std::cin >> opcion; 
-  switch(opcion){
-    case 's':
-      fillRandVector(v);
-      break;
-    case 'n':
-    int n;
-      for(int i = 0; i < v->size(); ++i){
-        std::cout << "Introduzca un numero: " << std::endl;
-        std::cin >> n;
-        v->at(i) = n;
-      }
-      break;
-  }
-
-
-  bool quit = false;
+  fillRandVector(v); // Volvemos a poner el vector desordenado.
+  std::vector<long> copy = *v;
 
   SortMethod<long>* sorter;
 
-  while (!quit) {
-    show_menu();
+  float alpha = 0.8;
+  sorter = new IncrDecMethod<long>(v, alpha ,v->size());
+  std::cout << "IncrDecMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
-    std::cin >> opcion; 
+  sorter = new InsercionMethod<long>(v, v->size());
+  std::cout << "InsercionMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
-    fillRandVector(v); // Volvemos a poner el vector desordenado.
-    std::cout << "vector desordenado:" << std::endl;
-    mostrar_v(v);  
+  sorter = new HeapSortMethod<long>(v, v->size());
+  std::cout << "HeapSortMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
-    switch(opcion){
-      /*
-      case 'q': quicksort<int>(v, 0, v->size()-1);
-        break;
-      */
-      case 'd':
-        float alpha;
-        int index, ini, cent, fin;
-        do{
-          std::cout << "Introduzca el incremento [0 < a < 1]: ";
-          std::cin >> alpha;
-        }while(!((alpha > 0) && (alpha < 1)));
+  sorter = new SeleccionMethod<long>(v, v->size());
+  std::cout << "SeleccionMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
-        sorter = new IncrDecMethod<long>(v, alpha ,v->size());
-        break;
-      case 'i':
-        sorter = new InsercionMethod<long>(v, v->size());
-        break;
-      case 'h': 
-        sorter = new HeapSortMethod<long>(v, v->size());
-        break;
-      case 's':
-        sorter = new SeleccionMethod<long>(v, v->size());
-        break;
-      case 'r': 
-        sorter = new RadixSortMethod<long>(v, v->size());
-        break;
-      case 'm': 
-        sorter = new MergeSortMethod<long>(v, v->size());
-        break;
-      case 'o': 
-        //auto start = high_resolution_clock::now();
-        //auto stop = high_resolution_clock::now();
-        chrono.start();
-        std::cout << "Insersion: " << chrono.duration() << std::endl;
-        chrono.stop();
+  sorter = new RadixSortMethod<long>(v, v->size());
+  std::cout << "RadixSortMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
-        chrono.start();
-        std::cout << "Seleccion: " << chrono.duration() << std::endl;
-        chrono.stop();
-
-        chrono.start();
-        std::cout << "Insersion: " << chrono.duration() << std::endl;
-        chrono.stop();
-        break;
-      case 'k': quit = true;
-        break;
-
-      default: std::cout << "opcion no soportada" << std::endl;    
-    }
-
-    // Ordenamos el vector
-    sorter->Sort();
-    std::cout << "vector ordenado:" << std::endl;
-    mostrar_v(v);
-    std::cout << std::endl;
-  }
+  sorter = new MergeSortMethod<long>(v, v->size());
+  std::cout << "MergeSortMethod: " << sorter->sort_time().count() << " ms." << std::endl;
+  *v = copy;
 
   delete v;
   delete sorter;

@@ -10,7 +10,7 @@
 #include "../include/heapSort.h"
 #include "../include/seleccion.h"
 #include "../include/radixSort.h"
-#include "../include/clave.h"
+
 
 const int MAX_INT = 9999;
 const int MIN_INT = 1000;

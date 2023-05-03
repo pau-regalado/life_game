@@ -54,53 +54,34 @@ NodoAVL<Key>::~NodoAVL(void){
 }
 
 template <class Key>
-NodoAVL<Key>* &NodoAVL<Key>::getIzq(void){
-  return h_izq_;
-}
+NodoAVL<Key>* &NodoAVL<Key>::getIzq(void){ return h_izq_; }
 
 template <class Key>
-NodoAVL<Key>* &NodoAVL<Key>::getDer(void){
-  return h_der_;
-}
+NodoAVL<Key>* &NodoAVL<Key>::getDer(void){ return h_der_; }
 
 template <class Key>
-Key NodoAVL<Key>::getData(void){
-  return data_;
-}
-template <class Key>
-Key NodoAVL<Key>::getClave(void){
-  return clave_;
-}
+Key NodoAVL<Key>::getData(void){ return data_; }
 
 template <class Key>
-void NodoAVL<Key>::setClave(Key clave){
-  clave_ = clave;
-}
+Key NodoAVL<Key>::getClave(void){ return clave_; }
 
 template <class Key>
-void NodoAVL<Key>::setIzq(NodoAVL<Key>* &izq){
-  h_izq_ = izq;
-}
+void NodoAVL<Key>::setClave(Key clave){ clave_ = clave; }
 
 template <class Key>
-void NodoAVL<Key>::setDer(NodoAVL<Key>* &der){
-  h_der_ = der;
-}
+void NodoAVL<Key>::setIzq(NodoAVL<Key>* &izq){ h_izq_ = izq; }
 
 template <class Key>
-void NodoAVL<Key>::setData(Key data){
-  data_ = data;
-}
+void NodoAVL<Key>::setDer(NodoAVL<Key>* &der){ h_der_ = der; }
 
 template <class Key>
-int& NodoAVL<Key>::getBal(void){
-  return bal_;
-}
+void NodoAVL<Key>::setData(Key data){ data_ = data; }
 
 template <class Key>
-void NodoAVL<Key>::setBal(int factor){
-  bal_ = factor;
-}
+int& NodoAVL<Key>::getBal(void){ return bal_; }
+
+template <class Key>
+void NodoAVL<Key>::setBal(int factor){ bal_ = factor; }
 
 template <class Key>
 NodoAVL<Key>& NodoAVL<Key>::operator=(const NodoAVL<Key> &nodo) {

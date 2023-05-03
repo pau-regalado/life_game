@@ -30,6 +30,12 @@ class AB{
 
     // Recorridos
     void inorden(NodoAVL<Key>* nodo) const;
+    void preorden(NodoAVL<Key>* nodo) const;
+    void postorden(NodoAVL<Key>* nodo) const;
+
+    void showInorden(void) const;
+    void showPreorden(void) const;
+    void showPostorden(void) const;
     void recorridoNiveles(void);
 
     //utiles
@@ -106,10 +112,50 @@ template <class Key>
 void AB<Key>::inorden(NodoAVL<Key>* nodo) const{
   if (!nodo){return;}
   inorden(nodo->getIzq());
+  std::cout << nodo->getData() << " ";
   //proceso NodoB->get_data()
   inorden(nodo->getDer());
 }
 
+template <class Key>
+void AB<Key>::preorden(NodoAVL<Key>* nodo) const{
+  if (!nodo){return;}
+  std::cout << nodo->getData() << " ";
+  preorden(nodo->getIzq());
+  //proceso NodoB->get_data()
+  preorden(nodo->getDer());
+}
+
+template <class Key>
+void AB<Key>::postorden(NodoAVL<Key>* nodo) const{
+  if (!nodo){return;}
+  postorden(nodo->getIzq());
+  postorden(nodo->getDer());
+  //proceso NodoB->getData()
+  std::cout << nodo->getData() << " ";
+
+}
+
+template <class Key>
+void AB<Key>::showInorden(void) const {
+  std::cout << "Recorrido inorden: ";
+  inorden(raiz_);
+  std::cout << std::endl;
+}
+
+template <class Key>
+void AB<Key>::showPreorden(void) const {
+  std::cout << "Recorrido preorden: ";
+  preorden(raiz_);
+  std::cout << std::endl;
+}
+
+template <class Key>
+void AB<Key>::showPostorden(void) const {
+  std::cout << "Recorrido postorden: ";
+  postorden(raiz_);
+  std::cout << std::endl;
+}
 
 template <class Key>
 void AB<Key>::recorridoNiveles(void){

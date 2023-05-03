@@ -34,7 +34,7 @@ void baja(std::vector<Key>* vector, int index, int size){
       swap(vector, index - 1, h - 1);
       index = h;
     }
-    mostrar_v(vector);
+    // mostrar_v(vector);
   }
 }
 

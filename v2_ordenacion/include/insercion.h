@@ -21,7 +21,7 @@ class InsercionMethod: public SortMethod<Key>{
         }
         vector->at(j+1) = x;
 
-        mostrar_v(vector);
+        // mostrar_v(vector);
       }
     }
 };

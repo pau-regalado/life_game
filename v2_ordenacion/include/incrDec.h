@@ -15,7 +15,7 @@ class IncrDecMethod: public SortMethod<Key>{
     void sort(std::vector<Key>* vector, int delta, int size){
       Key x; 
       int j;
-      std::cout << " delta = " << delta << std::endl;
+      //std::cout << " delta = " << delta << std::endl;
       for(int i = delta; i < size; i++){
         x = vector->at(i);
         j = i;
@@ -24,7 +24,7 @@ class IncrDecMethod: public SortMethod<Key>{
           j = j - delta;
         }
         vector->at(j) = x;
-        mostrar_v(vector);
+        //mostrar_v(vector);
       }
     }
 

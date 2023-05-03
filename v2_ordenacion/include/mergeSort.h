@@ -57,7 +57,7 @@ void mezcla(std::vector<Key>* vector, int ini, int cent, int fin){
     vector->at(l) = aux.at(l);
   }
   //std::cout << "sali del for l" << std::endl;
-  mostrar_v(vector);
+  //mostrar_v(vector);
 }
 
 void mergesort(std::vector<Key>* vector, int inicio, int fin){

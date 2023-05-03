@@ -21,6 +21,9 @@ void show_menu(char & o) {
   std::cout << "i) Insertar" << std::endl;
   std::cout << "b) Buscar" << std::endl;
   std::cout << "m) Mostrar" << std::endl;
+  std::cout << "1) Inorden" << std::endl;
+  std::cout << "2) Postorden" << std::endl;
+  std::cout << "3) Preorden" << std::endl;
   std::cout << "c) Cambiar arbol" << std::endl;
   std::cout << "s) Salir" << std::endl;
 
@@ -128,6 +131,18 @@ int main (int argc, char* argv[]){
       case 'm':
         std::cout << *arbol << std::endl;
         break;
+      case '1':
+        arbol->showInorden(); 
+        break;
+
+      case '2':
+        arbol->showPostorden(); 
+        break;
+
+      case '3':
+        arbol->showPreorden(); 
+        break;
+
       case 's': 
         quit = true;
         break;
